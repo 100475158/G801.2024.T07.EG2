@@ -3,7 +3,7 @@
 
 from UC3MTravel import HotelManager
 
-
+#hola
 def main():
     mng = HotelManager()
     res = mng.ReaddatafromJSOn("test.json")
