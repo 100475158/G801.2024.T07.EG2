@@ -26,7 +26,6 @@ def tarjeta(numero_tarjeta):
     lista_invertida = lista_tarjeta[::-1]
     #Multiplicar por 2 cada segundo digito empezando por la derecha
     #si el doble de un numero es mayor que 9 se suman las 2 cifras
-    print(lista_invertida)
     for i in range(len(lista_invertida)):
          if i % 2 !=0:
             doble = lista_invertida[i] * 2
@@ -39,7 +38,6 @@ def tarjeta(numero_tarjeta):
                     lista_invertida[i] = suma_doble
             else:
                 lista_invertida[i] = doble
-    print(lista_invertida)
     suma_digito = 0
     for digito in lista_invertida:
         suma_digito+= digito
@@ -48,13 +46,25 @@ def tarjeta(numero_tarjeta):
     else:
         print("El número de la tarjeta de credito", numero_tarjeta, "no es válido.")
 
-#
-
 
 #Numero de tarjeta valido
 valido= "4532015112830366"
 if tarjeta(valido):
     print("El número de la tarjeta de credito",valido,"es válido.")
+#Numero de tarjeta valido
+valido= "4539037881608776"
+if tarjeta(valido):
+    print("El número de la tarjeta de credito",valido,"es válido.")
+#Numero de tarjeta valido
+valido= "6011457659301864"
+if tarjeta(valido):
+    print("El número de la tarjeta de credito",valido,"es válido.")
+#Numero de tarjeta valido
+valido= "3714496353984315"
+if tarjeta(valido):
+    print("El número de la tarjeta de credito",valido,"es válido.")
+
+
 #Numero de tarjeta no valido
 no_valido= "1234567812345678"
 if tarjeta(no_valido):
