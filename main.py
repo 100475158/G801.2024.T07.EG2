@@ -26,17 +26,20 @@ def tarjeta(numero_tarjeta):
     lista_invertida = lista_tarjeta[::-1]
     #Multiplicar por 2 cada segundo digito empezando por la derecha
     #si el doble de un numero es mayor que 9 se suman las 2 cifras
-    i=1
+    print(lista_invertida)
     for i in range(len(lista_invertida)):
-         if i % 2 ==0:
-            doble= lista_invertida[i] * 2
+         if i % 2 !=0:
+            doble = lista_invertida[i] * 2
              # si el doble de un numero es mayor que 9 se suman las 2 cifras
             if doble > 9:
                 cadena_doble = str(doble)
                 suma_doble = 0
                 for j in cadena_doble:
                     suma_doble += int(j)
-         lista_invertida[i] = suma_doble
+                    lista_invertida[i] = suma_doble
+            else:
+                lista_invertida[i] = doble
+    print(lista_invertida)
     suma_digito = 0
     for digito in lista_invertida:
         suma_digito+= digito
