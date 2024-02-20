@@ -51,18 +51,6 @@ def tarjeta(numero_tarjeta):
 valido= "4532015112830366"
 if tarjeta(valido):
     print("El número de la tarjeta de credito",valido,"es válido.")
-#Numero de tarjeta valido
-valido= "4539037881608776"
-if tarjeta(valido):
-    print("El número de la tarjeta de credito",valido,"es válido.")
-#Numero de tarjeta valido
-valido= "6011457659301864"
-if tarjeta(valido):
-    print("El número de la tarjeta de credito",valido,"es válido.")
-#Numero de tarjeta valido
-valido= "3714496353984315"
-if tarjeta(valido):
-    print("El número de la tarjeta de credito",valido,"es válido.")
 
 
 #Numero de tarjeta no valido
