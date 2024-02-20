@@ -3,7 +3,7 @@
 
 from UC3MTravel import HotelManager
 
-#holaaa
+
 def main():
     mng = HotelManager()
     res = mng.ReaddatafromJSOn("test.json")
@@ -14,3 +14,21 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+if tarjeta():
+
+#Comprobamos si el número de la tarjeta de credito dado es valido
+if tarjeta(res.CREDITCARD):
+    printf("El número de la tarjeta de credito",res.CREDITCARD,"es válido.")
+
+else:
+    printf("El número de la tarjeta de credito",res.CREDITCARD,"no es válido.")
+
+#Numero de tarjeta valido
+valido=
+if tarjeta(valido):
+    printf("El número de la tarjeta de credito",valido,"es válido.")
+#Numero de tarjeta no valido
+no_valido=
+if tarjeta(no_valido):
+    printf("El número de la tarjeta de credito",no_valido,"no es válido.")
