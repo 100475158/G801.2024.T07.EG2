@@ -54,6 +54,6 @@ if tarjeta(valido):
 
 
 #Numero de tarjeta no valido
-no_valido= "1234567812345678"
+no_valido = "1234567812345678"
 if tarjeta(no_valido):
     print("El número de la tarjeta de credito",no_valido,"no es válido.")
