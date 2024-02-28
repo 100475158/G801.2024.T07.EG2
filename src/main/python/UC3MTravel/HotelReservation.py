@@ -4,15 +4,14 @@ import json
 from datetime import datetime
 
 class HotelReservation:
-    def __init__(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, room_type,numdays):
+    def __init__(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type,numdays):
         self.__crEDITcardnumber = creditcardNumb
         self.__idcard = IDCARD
-        justnow = datetime.utcnow()
-        self.__ARRIVAL = datetime.timestamp(justnow)
         self.__NAME_SURNAME = nAMeAndSURNAME
         self.__phonenumber = phonenumber
         self.__roomtype = room_type
         self.__num_days = numdays
+        self.__arrival = arrival
 
     def __str__(self):
         """return a json string with the elements required to calculate the localizer"""
