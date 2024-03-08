@@ -285,10 +285,10 @@ exclude-too-few-public-methods=
 ignored-parents=
 
 # Maximum number of arguments for function / method.
-max-args=5
+max-args=6
 
 # Maximum number of attributes for a class (see R0902).
-max-attributes=7
+max-attributes=8
 
 # Maximum number of boolean expressions in an if statement (see R0916).
 max-bool-expr=5
@@ -306,10 +306,10 @@ max-parents=7
 max-public-methods=20
 
 # Maximum number of return / yield for function / method body.
-max-returns=6
+max-returns=7
 
 # Maximum number of statements in function / method body.
-max-statements=50
+max-statements=55
 
 # Minimum number of public methods for a class (see R0903).
 min-public-methods=2
@@ -337,10 +337,10 @@ indent-after-paren=4
 indent-string='    '
 
 # Maximum number of characters on a single line.
-max-line-length=100
+max-line-length=120
 
 # Maximum number of lines in a module.
-max-module-lines=1000
+max-module-lines=1200
 
 # Allow the body of a class to be on the same line as the declaration if body
 # contains single statement.
@@ -510,13 +510,13 @@ ignore-imports=yes
 ignore-signatures=yes
 
 # Minimum lines number of a similarity.
-min-similarity-lines=4
+min-similarity-lines=3
 
 
 [SPELLING]
 
 # Limits count of emitted suggestions for spelling mistakes.
-max-spelling-suggestions=4
+max-spelling-suggestions=5
 
 # Spelling dictionary name. No available dictionaries : You need to install
 # both the python package and the system dependency for enchant to work.
