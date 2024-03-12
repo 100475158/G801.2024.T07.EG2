@@ -2,6 +2,7 @@
 import hashlib
 import json
 from datetime import datetime
+from HotelManager import HotelManager
 
 class HotelReservation:
     def __init__(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type,numdays):
@@ -25,6 +26,13 @@ class HotelReservation:
                      "room_type": self.__roomtype,
                      }
         return "HotelReservation:" + json_info.__str__()
+
+    def solicitar_reserva(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type,numdays):
+        Hotel1 = HotelManager()
+        return Hotel1.validatecreditcard(creditcardNumb)
+
+
+
     @property
     def CREDITCARD(self):
         return self.__crEDITcardnumber
@@ -44,3 +52,4 @@ class HotelReservation:
     def LOCALIZER( self ):
         """Returns the md5 signature"""
         return hashlib.md5(self.__str__().encode()).hexdigest()
+

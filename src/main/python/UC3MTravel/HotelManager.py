@@ -7,11 +7,23 @@ class HotelManager:
         pass
 
     def validatecreditcard( self, numero_tarjeta ):
+        #Comprobamos que sea una combinación de números enteros
+        if isinstance(numero_tarjeta, int):
+            pass
+        else:
+            return False
+
         lista_tarjeta = []
         # Cambio el numero de la tarjeta(que es un string) a una lista de enteros
-        # cambio el numero de tarjeta a string
         for numero in str(numero_tarjeta):
             lista_tarjeta.append(int(numero))
+
+        #Comprobamos que el numero sea de 16 dígitos
+        if len(lista_tarjeta) != 16:
+            return False
+        else:
+            pass
+
         # Empiezo algoritmo de Luhn
         # Invierto la lista para empezar por el ultimo numero pq el algoritmo lo requiere
         lista_invertida = lista_tarjeta[::-1]
@@ -59,3 +71,4 @@ class HotelManager:
 
         # Close the file
         return req
+
