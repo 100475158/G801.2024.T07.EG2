@@ -1,6 +1,7 @@
 import json
 from .HotelManagementException import HotelManagementException
 from .HotelReservation import HotelReservation
+from stdnum import es
 
 class HotelManager:
     def __init__(self):

@@ -27,10 +27,9 @@ class HotelReservation:
                      }
         return "HotelReservation:" + json_info.__str__()
 
-    def solicitar_reserva(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type,numdays):
+    def solicitar_reserva(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type, numdays):
         Hotel1 = HotelManager()
         return Hotel1.validatecreditcard(creditcardNumb)
-
 
 
     @property
