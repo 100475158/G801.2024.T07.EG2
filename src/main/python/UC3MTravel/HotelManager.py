@@ -53,6 +53,12 @@ class HotelManager:
         else:
             return False
 
+    def validate_id_card(self):
+
+
+
+
+
     def ReaddatafromJSOn( self, fi):
 
         try:
