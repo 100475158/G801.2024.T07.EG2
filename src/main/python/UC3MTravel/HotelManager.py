@@ -7,6 +7,9 @@ class HotelManager:
     def __init__(self):
         pass
 
+    def room_reservation(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type, numdays):
+        self.validatecreditcard(creditcardNumb)
+
     def validatecreditcard( self, numero_tarjeta ):
         #Comprobamos que sea una combinación de números enteros
         if isinstance(numero_tarjeta, int):
