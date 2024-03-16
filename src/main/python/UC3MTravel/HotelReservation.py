@@ -2,10 +2,9 @@
 import hashlib
 import json
 from datetime import datetime
-from HotelManager import HotelManager
 
 class HotelReservation:
-    def __init__(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type,numdays):
+    def __init__(self, IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type, numdays):
         self.__crEDITcardnumber = creditcardNumb
         self.__idcard = IDCARD
         self.__NAME_SURNAME = nAMeAndSURNAME
