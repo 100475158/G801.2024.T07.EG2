@@ -18,13 +18,19 @@ class HotelManager:
 
         def validatecreditcard(numero_tarjeta):
             #Comprobamos que sea un entero y que sea de 16 digitos
-            if not isinstance(numero_tarjeta, int) or len(str(numero_tarjeta)) != 16:
-                raise HotelManagementException("El numero de la tarjeta de credito es MUY largo")
+            if len(str(numero_tarjeta)) < 16:
+                raise HotelManagementException("El numero de la tarjeta de credito es demasiado corto")
 
+            if len(str(numero_tarjeta)) > 16:
+                raise HotelManagementException("El numero de la tarjeta de credito es demasiado largo")
             lista_tarjeta = []
             # Cambio el numero de la tarjeta(que es un string) a una lista de enteros
             for numero in str(numero_tarjeta):
                 lista_tarjeta.append(int(numero))
+
+
+                if not numero_tarjeta.isdigit():
+                    raise HotelManagementException("La tarjeta de credito no es un entero")
 
             # Empiezo algoritmo de Luhn
             # Invierto la lista para empezar por el ultimo numero pq el algoritmo lo requiere
@@ -49,7 +55,7 @@ class HotelManager:
             if suma_digito % 10 == 0:
                 return True
             else:
-                raise HotelManagementException("La tarjeta de crédito no cumple el algoritmo de Luhn")
+                raise HotelManagementException("La tarjeta de credito no cumple el algoritmo de Luhn")
 
         def validate_id_card(id_card):
             # Comprobamos que sea un string y de 9 caracteres
@@ -70,7 +76,7 @@ class HotelManager:
                 raise HotelManagementException("El Nombre no es válido")
             # Comprobamos que sean 2 o 3 cadenas de caracteres
             cadenas_nombre= nombre.split()
-            if len(cadenas_nombre) !=2 or len(cadenas_nombre) !=3:
+            if len(cadenas_nombre) !=2 and len(cadenas_nombre) !=3:
                 raise HotelManagementException("El Nombre no es válido")
             # Comprobamos que esten separadas por un espacio en blanco
             if "" not in nombre:
@@ -79,7 +85,7 @@ class HotelManager:
 
         def validate_phone(movil):
             # Comprobamos que sea un entero de 9 digitos
-            if not isinstance(movil, int) or len(str(movil)) != 9:
+            if not movil.isdigit() or len(str(movil)) != 9:
                 raise HotelManagementException("El Número de teléfono no es válido")
             return True
 
@@ -103,14 +109,14 @@ class HotelManager:
             dia = int(dia)
             mes = int(mes)
             año = int(año)
-            if not(1 <= dia <= 31 and 1 <= mes <= 12 and año != 2024):
+            if not (1 <= dia <= 31 or 1 <= mes <= 12 or año != 2024):
                 raise HotelManagementException("La llegada no es válida, esa fecha no existe")
             return True
         def validate_num_days(dias):
             # Comprobamos que sea un entero y que este entre 1 y 10
-            if not isinstance(dias, int):
+            if not dias.isdigit():
                 raise HotelManagementException("El número de días no es válido")
-            if not 1 <= dias <= 10:
+            if not 1 <= int(dias) <= 10:
                 raise HotelManagementException("El número de días no es válido")
             return True
 

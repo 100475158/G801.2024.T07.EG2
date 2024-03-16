@@ -55,7 +55,7 @@ class test_room_reservation(TestCase):
                                                 arrival = "14/16/2024",
                                                 numdays = "2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message,"El numero de la tarjeta de credito es MUY largo")
+        self.assertEqual(cm.exception.message,"El numero de la tarjeta de credito es demasiado largo")
 
     def test_menos_long_tc5(self):
         #Tarjeta de credito invalida,numero mas corto
@@ -69,7 +69,7 @@ class test_room_reservation(TestCase):
                                                 arrival = "14/16/2024",
                                                 numdays = "2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message,"El numero de la tarjeta de credito es mas corto")
+        self.assertEqual(cm.exception.message,"El numero de la tarjeta de credito es demasiado corto")
 
 if __name__ == '__main__':
     unittest.main()
