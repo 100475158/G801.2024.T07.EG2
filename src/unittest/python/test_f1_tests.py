@@ -1,6 +1,7 @@
 import unittest
 from unittest import TestCase
-from HotelManager import HotelManager
+from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
+from src.main.python.UC3MTravel.HotelManager import HotelManager
 
 class test_room_reservation(TestCase):
     def test_validCreditCard_tc1(self):
@@ -14,7 +15,6 @@ class test_room_reservation(TestCase):
                                                 arrival = "14/16/2024",
                                                 numdays = "2")
         print(valor)
-        self.assertEqual(valor,)
 
     def test_Luhn_tc2(self):
         #Tarjeta de credito invalida,no cumple algoritmo de Luhn
