@@ -3,7 +3,7 @@ from .HotelManagementException import HotelManagementException
 from .HotelReservation import HotelReservation
 import re
 import calendar
-import hashlib
+
 
 
 class HotelManager:
@@ -19,17 +19,6 @@ class HotelManager:
                          arrival,
                          room_type,
                          numdays):
-
-            # Funcion que genera la firma
-        def generar_firma(reserva):
-            # Obtener la representación en cadena de la reserva mediante __str__
-            reserva_str = str(reserva)
-
-            # Generar la firma MD5
-            md5_hash = hashlib.md5(reserva_str.encode()).hexdigest()
-
-            # La firma MD5 será el identificador de la reserva (localizador)
-            return md5_hash
 
         def validatecreditcard(numero_tarjeta):
             #Comprobamos que sea un entero y que sea de 16 digitos
@@ -185,17 +174,15 @@ class HotelManager:
             validate_arrival(arrival)
             validate_num_days(numdays)
 
-            # Si todas las validaciones pasan, generamos la reserva y obtenemos la firma
-            reserva = HotelReservation(IDCARD,
-                         creditcardNumb,
-                         nAMeAndSURNAME,
-                         phonenumber,
-                         arrival,
-                         room_type,
-                         numdays)  # Debes crear una instancia de HotelReservation con los datos proporcionados
-            localizador = generar_firma(reserva)
-            return localizador
+            # Si todos los datos son correctos, generas la reserva y obtienes el localizador
+            # Obtener la representación en cadena de la reserva mediante __str__
+            reserva = HotelReservation(IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type, numdays)
+            localizer = reserva.LOCALIZER  # Aquí invocas el método LOCALIZER
 
+            # Escribir los datos de la reserva en un archivo
+            with open("solicitudes.txt", "a") as file:
+                file.write(json.dumps(reserva.__dict__) + '\n')
+            return localizer
 
         except HotelManagementException as e:
             # Captura y propaga la excepción
