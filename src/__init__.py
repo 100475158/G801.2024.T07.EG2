@@ -1,6 +1,6 @@
 import unittest
-from UC3MTravel import HotelManagementException
-from UC3MTravel import HotelManager
+from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
+from src.main.python.UC3MTravel.HotelManager import HotelManager
 
 class TestRoomReservation(unittest.TestCase):
 
