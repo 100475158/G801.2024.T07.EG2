@@ -5,19 +5,18 @@ from src.main.python.UC3MTravel.HotelManager import HotelManager
 
 class test_room_reservation(TestCase):
     def test_valid_tc1(self):
-        #Tarjeta de credito valida
+        # Tarjeta de credito valida
         my_reservation = HotelManager()
         valor = my_reservation.room_reservation(creditcardNumb = "5555555555554444",
                                                 IDCARD = "12345678Z",
                                                 nAMeAndSURNAME = "JOSE LOPEZ",
                                                 phonenumber = "911234567",
                                                 room_type = "SINGLE",
-                                                arrival = "14/16/2024",
+                                                arrival = "14/10/2024",
                                                 numdays = "2")
-        print("OK")
-
+        self.assertEqual(valor,"87fe5bfb21d56ff3945c13a49201728d")
     def test_Luhn_CD_tc2(self):
-        #Tarjeta de credito invalida,no cumple algoritmo de Luhn
+        # Tarjeta de credito invalida,no cumple algoritmo de Luhn
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             valor = my_reservation.room_reservation(creditcardNumb = "5555555555554442",
@@ -25,12 +24,12 @@ class test_room_reservation(TestCase):
                                                 nAMeAndSURNAME = "JOSE LOPEZ",
                                                 phonenumber = "911234567",
                                                 room_type = "SINGLE",
-                                                arrival = "14/16/2024",
+                                                arrival = "14/10/2024",
                                                 numdays = "2")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message,"La tarjeta de credito no cumple el algoritmo de Luhn")
     def test_tipo_dato_CD_tc3(self):
-        #Tarjeta de credito invalida,no es un entero
+        # Tarjeta de credito invalida,no es un entero
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             valor = my_reservation.room_reservation(creditcardNumb = "555555555555444a",
@@ -38,13 +37,13 @@ class test_room_reservation(TestCase):
                                                 nAMeAndSURNAME = "JOSE LOPEZ",
                                                 phonenumber = "911234567",
                                                 room_type = "SINGLE",
-                                                arrival = "14/16/2024",
+                                                arrival = "14/10/2024",
                                                 numdays = "2")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message,"La tarjeta de credito no es un entero")
 
     def test_mas_long_CD_tc4(self):
-        #Tarjeta de credito invalida,numero mas largo
+        # Tarjeta de credito invalida,numero mas largo
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             valor = my_reservation.room_reservation(creditcardNumb = "95555555555554440",
@@ -52,13 +51,13 @@ class test_room_reservation(TestCase):
                                                 nAMeAndSURNAME = "JOSE LOPEZ",
                                                 phonenumber = "911234567",
                                                 room_type = "SINGLE",
-                                                arrival = "14/16/2024",
+                                                arrival = "14/10/2024",
                                                 numdays = "2")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message,"El numero de la tarjeta de credito es demasiado largo")
 
     def test_menos_long_CD_tc5(self):
-        #Tarjeta de credito invalida,numero mas corto
+        # Tarjeta de credito invalida,numero mas corto
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             valor = my_reservation.room_reservation(creditcardNumb = "555555555554440",
@@ -66,313 +65,277 @@ class test_room_reservation(TestCase):
                                                 nAMeAndSURNAME = "JOSE LOPEZ",
                                                 phonenumber = "911234567",
                                                 room_type = "SINGLE",
-                                                arrival = "14/16/2024",
+                                                arrival = "14/10/2024",
                                                 numdays = "2")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message,"El numero de la tarjeta de credito es demasiado corto")
 
     def test_tipo_dato_ID_tc6(self):
-        # Dni invalido,no es un string
+        # Dni invalido, no cumple el formato
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
                                                     IDCARD="123456789",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El dni no es un string")
+        self.assertEqual(cm.exception.message, "El formato DNI no es correcto")
 
     def test_mas_long_ID_tc7(self):
         # Dni invalido,longitud 10
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
                                                     IDCARD="123456789Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El dni tiene mas de 9 caracteres")
+        self.assertEqual(cm.exception.message, "El DNI es demasiado largo")
 
     def test_menos_long_ID_tc8(self):
         # Dni invalido,longitud 8
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="12345678",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="1234567Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El dni tiene menos de 9 caracteres")
+        self.assertEqual(cm.exception.message, "El DNI es demasiado corto")
 
-    def test_formato_ID_tc9(self):
-        # Dni invalido,no tiene una letra al final
-        my_reservation = HotelManager()
-        with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
-                                                    nAMeAndSURNAME="JOSE LOPEZ",
-                                                    phonenumber="911234567",
-                                                    room_type="SINGLE",
-                                                    arrival="14/16/2024",
-                                                    numdays="2")
-        print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El dni no tiene un formato valido")
-
-
-    def test_tipo_dato_nombre_tc10(self):
+    def test_tipo_dato_nombre_tc9(self):
         # Nombre invalido,no es un string
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="1234",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El nombre no es un string")
+        self.assertEqual(cm.exception.message, "Formato del Nombre incorrecto")
 
-    def test_1_cadena_nombre_tc11(self):
-        # Nombre invalido,tiene una cadena de caracteres
+    def test_1_cadena_nombre_tc10(self):
+        # Nombre invalido,tiene una o menos cadenas de caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
-                                                    nAMeAndSURNAME="JOSE",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
+                                                    nAMeAndSURNAME="JOSELUISLOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El nombre tiene menos de 2 cadenas de caracteres")
 
-    def test_4_cadenas_nombre_tc12(self):
-        # Nombre invalido,tiene cuatro cadenas de caracteres
+
+    def test_4_cadenas_nombre_tc11(self):
+        # Nombre invalido,tiene cuatro cadenas de caracteres o más
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ LOPEZ LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El nombre tiene mas de 3 cadenas de caracteres")
 
-    def test_no_espacio_nombre_tc13(self):
-        # Nombre invalido,no hay separacion de cadenas
-        my_reservation = HotelManager()
-        with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
-                                                    nAMeAndSURNAME="JOSELOPEZ",
-                                                    phonenumber="911234567",
-                                                    room_type="SINGLE",
-                                                    arrival="14/16/2024",
-                                                    numdays="2")
-        print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El nombre no esta separado por un espacio en blanco")
-
-
-    def test_menos_long_nombre_tc14(self):
+    def test_menos_long_nombre_tc12(self):
         # Nombre invalido,menos de 10 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPE",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El nombre tiene menos de 10 caracteres")
+        self.assertEqual(cm.exception.message, "El Nombre es demasiado corto")
 
 
-    def test_mas_long_nombre_tc15(self):
+    def test_mas_long_nombre_tc13(self):
         # Nombre invalido,mas de 50 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
-                                                    nAMeAndSURNAME="JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
+                                                    nAMeAndSURNAME="JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ JJJJJJJJJJJJJJJJJ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El nombre tiene mas de 50 caracteres")
+        self.assertEqual(cm.exception.message, "El Nombre demasiado largo")
 
-    def test_tipo_dato_phone_tc16(self):
+
+    def test_tipo_dato_phone_tc14(self):
         # Telefono invalido,no es un entero
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="91123456e",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El telefono no es un entero")
-
-    def test_mas_long_phone_tc17(self):
+        self.assertEqual(cm.exception.message, "El formato del Número de teléfono no es válido")
+    def test_mas_long_phone_tc15(self):
         # Telefono invalido,longitud 10
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="9112345678",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El telefono tiene mas de 9 digitos")
 
-    def test_menos_long_phone_tc18(self):
+    def test_menos_long_phone_tc16(self):
         # Telefono invalido,longitud 8
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="91123456",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El telefono tiene menos de 9 digitos")
 
-    def test_habitacion_incorrecta_tc19(self):
-        # Telefono invalido,longitud 8
+    def test_habitacion_incorrecta_tc17(self):
+        # Habitación incorrecta
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="5U1T3",
-                                                    arrival="14/16/2024",
+                                                    arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El telefono tiene menos de 9 digitos")
+        self.assertEqual(cm.exception.message, "La Habitación no es válida")
 
-    def test_tipo_dato_llegada_tc20(self):
-        #Llegada invalida,no es un string
+    def test_formato_llegada_tc18(self):
+        # Llegada invalida, fecha no existe
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14162024",
+                                                    arrival="24/55/2678",
                                                     numdays="2")
-        print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "La llegada no es un string")
+        self.assertEqual(str(cm.exception), "La llegada no es valida, esa fecha no existe")
 
-    def test_formato_llegada_tc21(self):
-        #Llegada invalida,formato incorrecto
+    def test_formato_llegada_tc19(self):
+        # Llegada invalida,formato incorrecto
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="35/54/2678",
+                                                    arrival="1401602024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El formato de la llegada es incorrecto")
+        self.assertEqual(cm.exception.message, "El formato de la llegada no es correcto")
 
-    def test_mas_long_llegada_tc22(self):
-        #Llegada invalida,11 caracteres
+    def test_mas_long_llegada_tc20(self):
+        # Llegada invalida,11 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14/16/20245",
+                                                    arrival="14/10/20245",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "La llegada tiene mas de 10 caracteres")
+        self.assertEqual(cm.exception.message, "La llegada es mayor de 10 caracteres")
 
-    def test_menos_long_llegada_tc23(self):
-        #Llegada invalida,9 caracteres
+    def test_menos_long_llegada_tc21(self):
+        # Llegada invalida,9 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
                                                     arrival="14/6/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "La llegada tiene menos de 10 caracteres")
+        self.assertEqual(cm.exception.message, "La llegada es menor de 10 caracteres")
 
-    def test_tipo_dato_num_dias_tc24(self):
-        #Numero de dias invalido,no es un entero
+    def test_tipo_dato_num_dias_tc22(self):
+        # Numero de dias invalido formato
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14162024",
+                                                    arrival="14/10/2024",
                                                     numdays="X")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El numero de dias no es un entero")
+        self.assertEqual(cm.exception.message, "El formato del numero de dias no es correcto")
 
-    def test_mas_num_dias_tc25(self):
+    def test_mas_num_dias_tc23(self):
         #Numero de dias invalido,11 dias
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14162024",
+                                                    arrival="14/10/2024",
                                                     numdays="11")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de dias es mayor de 10")
 
-    def test_menos_num_dias_tc26(self):
+    def test_menos_num_dias_tc24(self):
         #Numero de dias invalido,11 dias
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            valor = my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                                    IDCARD="123456789",
+            valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
+                                                    IDCARD="12345678Z",
                                                     nAMeAndSURNAME="JOSE LOPEZ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
-                                                    arrival="14162024",
+                                                    arrival="14/10/2024",
                                                     numdays="0")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de dias es menor de 1")
-
-
-
-
-
-
 
 if __name__ == '__main__':
     unittest.main()

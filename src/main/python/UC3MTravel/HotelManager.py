@@ -1,11 +1,15 @@
 import json
 from .HotelManagementException import HotelManagementException
 from .HotelReservation import HotelReservation
-from stdnum import es
+import re
+import calendar
+import hashlib
+
 
 class HotelManager:
     def __init__(self):
         pass
+
 
     def room_reservation(self,
                          IDCARD,
@@ -15,6 +19,17 @@ class HotelManager:
                          arrival,
                          room_type,
                          numdays):
+
+            # Funcion que genera la firma
+        def generar_firma(reserva):
+            # Obtener la representación en cadena de la reserva mediante __str__
+            reserva_str = str(reserva)
+
+            # Generar la firma MD5
+            md5_hash = hashlib.md5(reserva_str.encode()).hexdigest()
+
+            # La firma MD5 será el identificador de la reserva (localizador)
+            return md5_hash
 
         def validatecreditcard(numero_tarjeta):
             #Comprobamos que sea un entero y que sea de 16 digitos
@@ -58,68 +73,107 @@ class HotelManager:
                 raise HotelManagementException("La tarjeta de credito no cumple el algoritmo de Luhn")
 
         def validate_id_card(id_card):
-            # Comprobamos que sea un string y de 9 caracteres
-            if not isinstance(id_card, str) or len(id_card)!= 9:
-                raise HotelManagementException("El DNI no es válido")
-            # Comprobamos que sea un numero de 8 numeros seguidos de una letra
-            if not id_card[0:8].isdigit():
-                raise HotelManagementException("El DNI no es válido")
-            if not id_card[8].isalpha():
-                raise HotelManagementException("El DNI no es válido")
-            return True
+            tabla_letras = 'TRWAGMYFPDXBNJZSQVHLCKE'
+
+            # Comprobar longitud del DNI
+            if len(id_card) < 9:
+                raise HotelManagementException("El DNI es demasiado corto")
+            if len(id_card) > 9:
+                raise HotelManagementException("El DNI es demasiado largo")
+
+            # Extraer número y letra del DNI
+            try:
+                numero = int(id_card[:-1])
+                letra = id_card[-1].upper()
+            except ValueError:
+                raise HotelManagementException("El formato DNI no es correcto")
+
+            # Comprobar si la letra se corresponde con el número
+            if letra == tabla_letras[numero % 23]:
+                return True
+            else:
+                raise HotelManagementException("El formato DNI no es correcto")
 
         def validate_name(nombre):
+            cadenas_nombre = nombre.split()
+            for palabra in cadenas_nombre:
+                if not palabra.isalpha():
+                    raise HotelManagementException("Formato del Nombre incorrecto")
             # Comprobamos que sea un string y de entre 10 y 50 caracteres
-            if not isinstance(nombre, str):
-                raise HotelManagementException("El Nombre no es válido")
-            if not 10<=len(nombre)<=50:
-                raise HotelManagementException("El Nombre no es válido")
+            if len(nombre) < 10:
+                raise HotelManagementException("El Nombre es demasiado corto")
+            if len(nombre) > 50:
+                raise HotelManagementException("El Nombre demasiado largo")
             # Comprobamos que sean 2 o 3 cadenas de caracteres
-            cadenas_nombre= nombre.split()
-            if len(cadenas_nombre) !=2 and len(cadenas_nombre) !=3:
-                raise HotelManagementException("El Nombre no es válido")
+            if len(cadenas_nombre) < 2:
+                raise HotelManagementException("El nombre tiene menos de 2 cadenas de caracteres")
+            if len(cadenas_nombre) > 3:
+                raise HotelManagementException("El nombre tiene mas de 3 cadenas de caracteres")
             # Comprobamos que esten separadas por un espacio en blanco
             if "" not in nombre:
-                raise HotelManagementException("El Nombre no es válido")
+                raise HotelManagementException("Formato del Nombre incorrecto")
             return True
 
         def validate_phone(movil):
             # Comprobamos que sea un entero de 9 digitos
-            if not movil.isdigit() or len(str(movil)) != 9:
-                raise HotelManagementException("El Número de teléfono no es válido")
+            if not movil.isdigit():
+                raise HotelManagementException("El formato del Número de teléfono no es válido")
+            if len(str(movil)) < 9:
+                raise HotelManagementException("El telefono tiene menos de 9 digitos")
+            if len(str(movil)) > 9:
+                raise HotelManagementException("El telefono tiene mas de 9 digitos")
             return True
 
         def validate_room(habitacion):
-            # Comprobamos que sea un string
-            if not isinstance(habitacion, str):
-                raise HotelManagementException("La Habitación no es válida")
             # Convertimos la palabra a minusculas por si el usuario introduce mayusculas
             habitacion = habitacion.lower()
             # Comprobamos que sea single, double o suite
             if habitacion != "single" and habitacion != "double" and habitacion != "suite":
-                raise HotelManagementException("L Habitación no es válida")
+                raise HotelManagementException("La Habitación no es válida")
             return True
 
         def validate_arrival(llegada):
             #Comprobamos que sea un string de 10 caracteres
-            if not isinstance(llegada, str) or len(llegada) != 10:
-                raise HotelManagementException("La llegada no es válida")
-            #Comprobamos el formato(“DD/MM/YYYY” )
+            if len(llegada) < 10:
+                raise HotelManagementException("La llegada es menor de 10 caracteres")
+            if len(llegada) > 10:
+                raise HotelManagementException("La llegada es mayor de 10 caracteres")
+
+            # Comprobamos el formato(“DD/MM/YYYY” )
+            # Definimos el patrón regex para el formato de fecha
+            patron = r'\d{2}/\d{2}/\d{4}'
+            # Comprobamos si la fecha coincide con el patrón
+            if not re.fullmatch(patron, llegada):
+                raise HotelManagementException("El formato de la llegada no es correcto")
+
+            # Comprobamos que la fecha tenga sentido y exista
             dia, mes, año = llegada.split("/")
             dia = int(dia)
             mes = int(mes)
             año = int(año)
-            if not (1 <= dia <= 31 or 1 <= mes <= 12 or año != 2024):
-                raise HotelManagementException("La llegada no es válida, esa fecha no existe")
+            # Verificar si el año es bisiesto
+            bisiesto = calendar.isleap(año)
+
+            # Verificar si la fecha es válida
+            if mes < 1 or mes > 12 or dia < 1 or dia > 31:
+                raise HotelManagementException("La llegada no es valida, esa fecha no existe")
+            elif mes in [4, 6, 9, 11] and dia > 30:
+                raise HotelManagementException("La llegada no es valida, esa fecha no existe")
+            elif mes == 2:
+                if bisiesto and dia > 29:
+                    raise HotelManagementException("La llegada no es valida, esa fecha no existe")
+                elif not bisiesto and dia > 28:
+                    raise HotelManagementException("La llegada no es valida, esa fecha no existe")
             return True
         def validate_num_days(dias):
             # Comprobamos que sea un entero y que este entre 1 y 10
             if not dias.isdigit():
-                raise HotelManagementException("El número de días no es válido")
-            if not 1 <= int(dias) <= 10:
-                raise HotelManagementException("El número de días no es válido")
+                raise HotelManagementException("El formato del numero de dias no es correcto")
+            if int(dias) > 10:
+                raise HotelManagementException("El numero de dias es mayor de 10")
+            if int(dias) < 1:
+                raise HotelManagementException("El numero de dias es menor de 1")
             return True
-
 
             #Llamamos a las funciones despues de definirlas
         try:
@@ -131,11 +185,24 @@ class HotelManager:
             validate_arrival(arrival)
             validate_num_days(numdays)
 
+            # Si todas las validaciones pasan, generamos la reserva y obtenemos la firma
+            reserva = HotelReservation(IDCARD,
+                         creditcardNumb,
+                         nAMeAndSURNAME,
+                         phonenumber,
+                         arrival,
+                         room_type,
+                         numdays)  # Debes crear una instancia de HotelReservation con los datos proporcionados
+            localizador = generar_firma(reserva)
+            return localizador
+
+
         except HotelManagementException as e:
             # Captura y propaga la excepción
             raise e
 
-    def ReaddatafromJSOn( self, fi):
+
+def ReaddatafromJSOn(self, fi):
 
         try:
             with open(fi) as f:
