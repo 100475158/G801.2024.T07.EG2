@@ -179,11 +179,15 @@ class HotelManager:
             reserva = HotelReservation(IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type, numdays)
             localizer = reserva.LOCALIZER  # Aquí invocas el método LOCALIZER
 
+            # Crear un diccionario con los datos de la reserva y el localizador
+            reserva_dict = reserva.__dict__
+            reserva_dict['LOCALIZER'] = localizer
+
             # Escribir los datos de la reserva en un archivo
             with open("solicitudes.txt", "a") as file:
-                file.write(json.dumps(reserva.__dict__) + '\n')
-            return localizer
+                file.write(json.dumps(reserva_dict) + '\n')
 
+            return localizer
         except HotelManagementException as e:
             # Captura y propaga la excepción
             raise e
