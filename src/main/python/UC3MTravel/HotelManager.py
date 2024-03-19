@@ -1,4 +1,6 @@
 import json
+from pathlib import Path
+import os
 from .HotelManagementException import HotelManagementException
 from .HotelReservation import HotelReservation
 import re
@@ -183,9 +185,44 @@ class HotelManager:
             reserva_dict = reserva.__dict__
             reserva_dict['LOCALIZER'] = localizer
 
+            # Directorio donde se guardarán los archivos JSON
+            json_files_path = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
+            # Ruta completa del archivo de reserva
+            file_store = json_files_path + "store_reservation.json"
+            print(file_store)
+
+            # Verificar si el directorio existe, y si no, crearlo
+            if not os.path.exists(json_files_path):
+                os.makedirs(json_files_path)
+
             # Escribir los datos de la reserva en un archivo
-            with open("solicitudes.txt", "a") as file:
-                file.write(json.dumps(reserva_dict) + '\n')
+            try:
+                # Intentar cargar los datos existentes del archivo si existe
+                with open(file_store, "r", encoding="utf-8") as file:
+                    data_list = json.load(file)
+            except FileNotFoundError:
+                # Si el archivo no existe, crear una lista vacía
+                data_list = []
+            except json.JSONDecodeError as ex:
+                # Manejar errores de decodificación JSON
+                raise HotelManagementException("Error de decodificación JSON - Formato JSON incorrecto") from ex
+
+            # Comprobar si la reserva ya existe en la lista
+            for item in data_list:
+                if reserva.LOCALIZER == item.get("LOCALIZER"):
+                    raise HotelManagementException("Reserva ya realizada")
+
+            # Añadir los datos de la reserva a la lista
+            data_list.append(reserva.__dict__)
+
+            # Escribir la lista actualizada en el archivo
+            try:
+                with open(file_store, "w", encoding="utf-8") as file:
+                    json.dump(data_list, file, indent=2)
+            except FileNotFoundError:
+                raise HotelManagementException("Archivo no encontrado")
+            except Exception as e:
+                raise HotelManagementException("Error al escribir en el archivo JSON") from e
 
             return localizer
         except HotelManagementException as e:
