@@ -189,7 +189,6 @@ class HotelManager:
             json_files_path = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
             # Ruta completa del archivo de reserva
             file_store = json_files_path + "store_reservation.json"
-            print(file_store)
 
             # Verificar si el directorio existe, y si no, crearlo
             if not os.path.exists(json_files_path):
@@ -244,7 +243,7 @@ def ReaddatafromJSOn(self, fi):
         try:
             c = DATA["CreditCard"]
             p = DATA["phoneNumber"]
-            req = HotelReservation(IDCARD="12345678Z",creditcardNumb=c,nAMeAndSURNAME="John Doe",phonenumber=p,room_type="single",numdays=3)
+            req = HotelReservation(IDCARD="12345678Z", creditcardNumb=c, nAMeAndSURNAME="John Doe", phonenumber=p, room_type="single", numdays=3)
         except KeyError as e:
             raise HotelManagementException("JSON Decode Error - Invalid JSON Key") from e
         if not self.validatecreditcard(c):

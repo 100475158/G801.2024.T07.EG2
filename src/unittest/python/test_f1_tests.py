@@ -1,10 +1,19 @@
 import unittest
+import json
+from pathlib import Path
+import os
 from unittest import TestCase
 from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
 from src.main.python.UC3MTravel.HotelManager import HotelManager
-from src.main.python.UC3MTravel.HotelReservation import HotelReservation
 
 class test_room_reservation(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        json_files_path = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
+        cls.file_store = json_files_path + "store_reservation.json"
+        if os.path.isfile(cls.file_store):
+            os.remove(cls.file_store)
+
     def test_valid_tc1(self):
         # CASI todas las clases válidas
         my_reservation = HotelManager()
@@ -17,6 +26,16 @@ class test_room_reservation(TestCase):
                                                 numdays = "2")
         print("OK")
         self.assertEqual(valor,"f9ab0de669b4fccf3ce0efd99cbded11")
+
+        with open(self.file_store, "r", encoding="utf-8") as file:
+            data_list = json.load(file)
+        found = False
+        for item in data_list:
+            if item["LOCALIZER"] == "f9ab0de669b4fccf3ce0efd99cbded11":
+                found = True
+        self.assertTrue(found)
+
+
     def test_Luhn_CD_tc2(self):
         # Tarjeta de credito invalida,no cumple algoritmo de Luhn
         my_reservation = HotelManager()
@@ -139,6 +158,14 @@ class test_room_reservation(TestCase):
                                                 numdays = "2")
         print("OK")
         self.assertEqual(valor,"ddd1ae3b83051f1ff4dbdbae022ce195")
+
+        with open(self.file_store, "r", encoding="utf-8") as file:
+            data_list = json.load(file)
+        found = False
+        for item in data_list:
+            if item["LOCALIZER"] == "ddd1ae3b83051f1ff4dbdbae022ce195":
+                found = True
+        self.assertTrue(found)
     def test_1_cadena_nombre_tc11(self):
         # Nombre invalido, tiene una o menos cadenas de caracteres
         my_reservation = HotelManager()
@@ -266,6 +293,14 @@ class test_room_reservation(TestCase):
         print("OK")
         self.assertEqual(valor,"46324af73dfb272314924e6a876dc2ac")
 
+        with open(self.file_store, "r", encoding="utf-8") as file:
+            data_list = json.load(file)
+        found = False
+        for item in data_list:
+            if item["LOCALIZER"] == "46324af73dfb272314924e6a876dc2ac":
+                found = True
+        self.assertTrue(found)
+
     def test_valid_tc20(self):
         # Habitación correcta SUITE
         my_reservation = HotelManager()
@@ -278,6 +313,14 @@ class test_room_reservation(TestCase):
                                                 numdays = "2")
         print("OK")
         self.assertEqual(valor,"5d6cfb6170189551fa11ffd37b616140")
+
+        with open(self.file_store, "r", encoding="utf-8") as file:
+            data_list = json.load(file)
+        found = False
+        for item in data_list:
+            if item["LOCALIZER"] == "5d6cfb6170189551fa11ffd37b616140":
+                found = True
+        self.assertTrue(found)
 
     def test_formato_llegada_tc21(self):
         # Llegada invalida, fecha no existe
