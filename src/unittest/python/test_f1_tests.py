@@ -418,6 +418,7 @@ class test_room_reservation(TestCase):
                                                     numdays="0")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de dias es menor de 1")
+"""class TestGuestArrival(unittest.TestCase):"""
 
 if __name__ == '__main__':
     unittest.main()

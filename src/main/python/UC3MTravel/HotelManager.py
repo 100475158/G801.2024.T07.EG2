@@ -3,8 +3,10 @@ from pathlib import Path
 import os
 from .HotelManagementException import HotelManagementException
 from .HotelReservation import HotelReservation
+from .HotelStay import HotelStay
 import re
 import calendar
+import hashlib
 
 
 
@@ -228,7 +230,47 @@ class HotelManager:
             # Captura y propaga la excepción
             raise e
 
+    def guest_arrival(input_file):
+        try:
+            with open(input_file, 'r') as f:
+                data = json.load(f)
 
+            localizer = data.get("Localizer")
+            idcard = data.get("IdCard")
+
+            if localizer is None or idcard is None:
+                raise HotelManagementException("El archivo JSON no tiene la estructura esperada")
+
+            # Verificar si el localizador está en el archivo de reservas y coincide
+            # Aquí deberías tener lógica para leer el archivo de reservas y hacer la verificación
+
+            # Simulando la comprobación del localizador en el archivo de reservas
+            if localizer != "LOCALIZER":
+                raise HotelManagementException("El localizador no se corresponde con los datos almacenados")
+
+            # Crear instancia de HotelStay
+            numdays = 3  # Suponiendo que el número de días siempre es 3
+            roomtype = "single"  # Suponiendo que el tipo de habitación siempre es "single"
+            hotel_stay = HotelStay(idcard=idcard, localizer=localizer, numdays=numdays, roomtype=roomtype)
+
+            # Guardar la información de la estancia en un archivo JSON
+            with open("estancias.json", "a") as estancias_file:
+                json.dump(hotel_stay.__dict__, estancias_file)
+                estancias_file.write('\n')
+
+            # Calcular la clave de la habitación utilizando SHA-256
+            room_key = hashlib.sha256(json.dumps(hotel_stay.__dict__).encode()).hexdigest()
+
+            return room_key
+
+        except FileNotFoundError:
+            raise HotelManagementException("No se encuentra el archivo de datos")
+        except json.JSONDecodeError:
+            raise HotelManagementException("El archivo no tiene formato JSON")
+        except ValueError:
+            raise HotelManagementException("Los datos del JSON no tienen valores válidos")
+        except Exception as e:
+            raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
 def ReaddatafromJSOn(self, fi):
 
         try:
