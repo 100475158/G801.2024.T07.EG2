@@ -33,7 +33,6 @@ class HotelReservation:
     @CREDITCARD.setter
     def CREDITCARD(self, value):
         self.__crEDITcardnumber = value
-
     @property
     def IDCARD(self):
         return self.__idcard
