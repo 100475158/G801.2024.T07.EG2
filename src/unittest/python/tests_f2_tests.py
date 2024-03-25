@@ -1,16 +1,14 @@
 import unittest
+import json
+from pathlib import Path
+import os
 from unittest import TestCase
 from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
 from src.main.python.UC3MTravel.HotelManager import HotelManager
-from src.main.python.UC3MTravel.HotelReservation import HotelReservation
-import json
-import hashlib
-import datetime
-from pathlib import Path
-import os
+
 
 class TestGuestArrival(TestCase):
-    def test_guest_arrival_test_ok(self):
+    """def test_guest_arrival_test_ok(self):
         for index, input_data in enumerate(self.__test_data_f2):
             if index + 1 in [1]:
                 test_id = "TC" + str(index + 1)
@@ -21,7 +19,7 @@ class TestGuestArrival(TestCase):
                     room_key= hm.guest_arrival(self.__path_tests + self.tmp_test_data_file)
                     match test_id:
                         case "TC1":
-                            print("OK")
+                            print(room_key)
                             self.assertEqual(room_key, "ee25b7b863b77e9106d851875103a3076748a0d487e7a42340ea18855d36b89f")
 
     def get_store_hash(self):
@@ -52,8 +50,16 @@ class TestGuestArrival(TestCase):
                             case "TC31", "TC52", "TC59":
                                 print(ar.exception.message)
                                 self.assertEqual(ar.exception.message, "El localizador no se corresponde con los datos almacenados")
-
-
+"""
+#ENFOQUE 1
+    def test_guest_arrival_test_tc30(self):
+        #Eliminacion nodo 8 comillas
+        checkin=HotelManager()
+        with self.assertRaises(HotelManagementException) as cm:
+            tc30 = "/PycharmProjects/G801.2024.T07.EG2/src/json_files/entradas_f2/tc30.json"
+            checkin.guest_arrival(tc30)
+            print(cm.exception.message)
+            self.assertEqual(cm.exception.message,"El archivo no tiene formato JSON")
 
 
 

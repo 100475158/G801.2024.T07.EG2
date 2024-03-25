@@ -418,18 +418,6 @@ class test_room_reservation(TestCase):
                                                     numdays="0")
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de dias es menor de 1")
-"""class TestGuestArrival(unittest.TestCase):
-    def test_valido_tc1(self):
-        for index, input_data in enumerate(self.__test_data_f2):
-            if index +1 in [1]:
-                test_id = "TC" + str(index + 1)
-                with self.subTest(test_id):
-                    print("Executing: "+ test_id + ":" +input_data)
-                    self.generate_tmp_test_data_file(input_data)
-                    hm= HotelManager()
-                    room_key= hm.guest_arrival(self.__path_tests + self.tmp_test_data_file)
-                    match test_id:
-                        case "TC1":
-                            self.assertEqual(room_key,"")
+
 if __name__ == '__main__':
     unittest.main()

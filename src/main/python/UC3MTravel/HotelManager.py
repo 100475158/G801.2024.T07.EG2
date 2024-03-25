@@ -218,7 +218,7 @@ class HotelManager:
 
             # Escribir la lista actualizada en el archivo
             try:
-                with open(file_store, "w", encoding="utf-8") as file:
+                with open(file_store, "w", encoding="utf-8") as file:ç
                     json.dump(data_list, file, indent=2)
             except FileNotFoundError:
                 raise HotelManagementException("Archivo no encontrado")
