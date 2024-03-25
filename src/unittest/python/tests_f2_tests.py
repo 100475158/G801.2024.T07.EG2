@@ -21,7 +21,7 @@ class TestGuestArrival(TestCase):
                     room_key= hm.guest_arrival(self.__path_tests + self.tmp_test_data_file)
                     match test_id:
                         case "TC1":
-                            print(room_key)
+                            print("OK")
                             self.assertEqual(room_key, "ee25b7b863b77e9106d851875103a3076748a0d487e7a42340ea18855d36b89f")
 
     def get_store_hash(self):
