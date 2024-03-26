@@ -56,15 +56,14 @@ class TestGuestArrival(TestCase):
         #Eliminacion nodo 8 comillas
         checkin=HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            tc30 = ""
+            tc30 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc30.json"
             checkin.guest_arrival(tc30)
-        print(cm.exception.message)
-        self.assertEqual(cm.exception.message,"El archivo no tiene formato JSON")
+        self.assertEqual(cm.exception.message, "El archivo no tiene formato JSON")
     def test_guest_arrival_test_tc31(self):
         #Eliminacion nodo 9 Etiqueta_dato1
         checkin=HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            tc31 = "/PycharmProjects/G801.2024.T07.EG2/src/json_files/entradas_f2/tc31.json"
+            tc31 = "C:/PycharmProjects/G801.2024.T07.EG2/src/json_files/entradas_f2/tc31.json"
             checkin.guest_arrival(tc31)
         print(cm.exception.message)
         self.assertEqual(cm.exception.message,"KEY ERROR")
