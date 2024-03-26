@@ -218,7 +218,7 @@ class HotelManager:
 
             # Escribir la lista actualizada en el archivo
             try:
-                with open(file_store, "w", encoding="utf-8") as file:ç
+                with open(file_store, "w", encoding="utf-8") as file:
                     json.dump(data_list, file, indent=2)
             except FileNotFoundError:
                 raise HotelManagementException("Archivo no encontrado")
@@ -230,7 +230,7 @@ class HotelManager:
             # Captura y propaga la excepción
             raise e
 
-    def guest_arrival(input_file):
+    def guest_arrival(self,input_file):
         try:
             with open(input_file, 'r') as f:
                 data = json.load(f)
