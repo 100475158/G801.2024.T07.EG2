@@ -1,3 +1,4 @@
+import hashlib
 import unittest
 import json
 from pathlib import Path
@@ -55,10 +56,11 @@ class TestGuestArrival(TestCase):
 
     def test_guest_arrival_test_tc1(self):
         #Test valido
-        checkin=HotelManager()
-        with self.assertRaises(HotelManagementException) as cm:
-            tc1 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc1.json"
-            checkin.guest_arrival(tc1)
+        hm = HotelManager()
+        tc2 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc1.json"
+        room_key = hm.guest_arrival(tc2)
+        self.assertEqual(room_key, "")
+
 
     def test_guest_arrival_test_tc2(self):
         #Duplicación del nodo JSON
@@ -535,3 +537,4 @@ class TestGuestArrival(TestCase):
             checkin.guest_arrival(tc60)
         print(cm.exception.message)
         self.assertEqual(cm.exception.message,"El archivo no tiene formato JSON")
+
