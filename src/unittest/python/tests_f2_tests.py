@@ -303,7 +303,7 @@ class TestGuestArrival(TestCase):
             tc31 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc31.json"
             checkin.guest_arrival(tc31)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "")
+        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
     def test_guest_arrival_test_tc32(self):
         # Eliminacion nodo 10 comillas
         checkin = HotelManager()
@@ -365,7 +365,7 @@ class TestGuestArrival(TestCase):
             tc38 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc38.json"
             checkin.guest_arrival(tc38)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "")
+        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc39(self):
         # Eliminacion nodo 19 comillas
@@ -401,7 +401,7 @@ class TestGuestArrival(TestCase):
             tc42 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc42.json"
             checkin.guest_arrival(tc42)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "")
+        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc43(self):
         # Eliminacion nodo 25 comillas
@@ -455,7 +455,7 @@ class TestGuestArrival(TestCase):
             tc48 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc48.json"
             checkin.guest_arrival(tc48)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "")
+        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc49(self):
         # Modificacion nodo 31 "" por ¿
@@ -518,7 +518,7 @@ class TestGuestArrival(TestCase):
             tc55 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc55.json"
             checkin.guest_arrival(tc55)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "")
+        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc56(self):
         # Modificacion nodo 40 " por .
@@ -554,7 +554,7 @@ class TestGuestArrival(TestCase):
             tc59 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc59.json"
             checkin.guest_arrival(tc59)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "")
+        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc60(self):
         # Modificacion nodo 46 " por ,

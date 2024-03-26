@@ -247,8 +247,7 @@ class HotelManager:
             # Simulando la comprobación del localizador en el archivo de reservas
             if localizer != "LOCALIZER":
                 raise HotelManagementException("El localizador no se corresponde con los datos almacenados")
-            if idcard != "IdCard":
-                raise HotelManagementException("El IdCard no se corresponde con los datos almacenados")
+
 
             # Crear instancia de HotelStay
             numdays = 3  # Suponiendo que el número de días siempre es 3
