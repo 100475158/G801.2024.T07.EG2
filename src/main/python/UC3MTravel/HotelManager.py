@@ -96,7 +96,7 @@ class HotelManager:
             if len(nombre) < 10:
                 raise HotelManagementException("El Nombre es demasiado corto")
             if len(nombre) > 50:
-                raise HotelManagementException("El Nombre demasiado largo")
+                raise HotelManagementException("El Nombre es demasiado largo")
             # Comprobamos que sean 2 o 3 cadenas de caracteres
             if len(cadenas_nombre) < 2:
                 raise HotelManagementException("El nombre tiene menos de 2 cadenas de caracteres")
