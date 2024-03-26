@@ -216,7 +216,7 @@ class test_room_reservation(TestCase):
         with self.assertRaises(HotelManagementException) as cm:
             valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
                                                     IDCARD="12345678Z",
-                                                    nAMeAndSURNAME="JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ",
+                                                    nAMeAndSURNAME="JJJJJJJJJJJJJJJJJJJJJJJJ JJJJJJJJJJJJJJJJJJJJJJJJJJ",
                                                     phonenumber="911234567",
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
@@ -419,5 +419,7 @@ class test_room_reservation(TestCase):
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de dias es menor de 1")
 
+
 if __name__ == '__main__':
     unittest.main()
+
