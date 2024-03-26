@@ -8,38 +8,5 @@
     "_HotelReservation__num_days": "2",
     "_HotelReservation__ARRIVAL": "14/10/2024",
     "LOCALIZER": "f9ab0de669b4fccf3ce0efd99cbded11"
-<<<<<<< HEAD
-=======
-  },
-  {
-    "_HotelReservation__crEDITcardnumber": "5555555555554444",
-    "_HotelReservation__idcard": "12345678Z",
-    "_HotelReservation__NAME_SURNAME": "ANTONIO LOPEZ LOPEZ",
-    "_HotelReservation__phonenumber": "911234567",
-    "_HotelReservation__roomtype": "SINGLE",
-    "_HotelReservation__num_days": "2",
-    "_HotelReservation__ARRIVAL": "14/10/2024",
-    "LOCALIZER": "ddd1ae3b83051f1ff4dbdbae022ce195"
-  },
-  {
-    "_HotelReservation__crEDITcardnumber": "5555555555554444",
-    "_HotelReservation__idcard": "12345678Z",
-    "_HotelReservation__NAME_SURNAME": "ANTONIO LOPEZ",
-    "_HotelReservation__phonenumber": "911234567",
-    "_HotelReservation__roomtype": "DOUBLE",
-    "_HotelReservation__num_days": "2",
-    "_HotelReservation__ARRIVAL": "14/10/2024",
-    "LOCALIZER": "46324af73dfb272314924e6a876dc2ac"
-  },
-  {
-    "_HotelReservation__crEDITcardnumber": "5555555555554444",
-    "_HotelReservation__idcard": "12345678Z",
-    "_HotelReservation__NAME_SURNAME": "ANTONIO LOPEZ",
-    "_HotelReservation__phonenumber": "911234567",
-    "_HotelReservation__roomtype": "SUITE",
-    "_HotelReservation__num_days": "2",
-    "_HotelReservation__ARRIVAL": "14/10/2024",
-    "LOCALIZER": "5d6cfb6170189551fa11ffd37b616140"
->>>>>>> origin/main
   }
 ]
