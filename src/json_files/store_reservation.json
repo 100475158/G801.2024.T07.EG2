@@ -1,0 +1,12 @@
+[
+  {
+    "_HotelReservation__crEDITcardnumber": "5555555555554444",
+    "_HotelReservation__idcard": "12345678Z",
+    "_HotelReservation__NAME_SURNAME": "JOSE LOPEZ",
+    "_HotelReservation__phonenumber": "911234567",
+    "_HotelReservation__roomtype": "SINGLE",
+    "_HotelReservation__num_days": "2",
+    "_HotelReservation__ARRIVAL": "14/10/2024",
+    "LOCALIZER": "f9ab0de669b4fccf3ce0efd99cbded11"
+  }
+]
