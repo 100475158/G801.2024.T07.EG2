@@ -230,7 +230,7 @@ class HotelManager:
             # Captura y propaga la excepción
             raise e
 
-    def guest_arrival(self,input_file):
+    def guest_arrival(self, input_file):
         try:
             with open(input_file, 'r') as f:
                 data = json.load(f)
@@ -242,6 +242,18 @@ class HotelManager:
                 raise HotelManagementException("El archivo JSON no tiene la estructura esperada")
 
             # Verificar si el localizador está en el archivo de reservas y coincide
+            with open(input_file, 'r') as f:
+                reservations = json.load(f)
+
+            # Verificar si el localizador está en las reservas
+            localizer_found = False
+            for reservation in reservations:
+                if reservation.get("Localizer") == localizer:
+                    localizer_found = True
+                    break
+
+            if not localizer_found:
+                raise HotelManagementException("El localizador no se encuentra en el archivo de reservas")
             # Aquí deberías tener lógica para leer el archivo de reservas y hacer la verificación
 
             # Simulando la comprobación del localizador en el archivo de reservas
