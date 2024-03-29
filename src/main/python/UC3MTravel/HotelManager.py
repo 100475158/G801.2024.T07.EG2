@@ -242,39 +242,24 @@ class HotelManager:
                 raise HotelManagementException("El archivo JSON no tiene la estructura esperada")
 
             # Verificar si el localizador está en el archivo de reservas y coincide
-            with open(input_file, 'r') as f:
+            tc0 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/store_reservation.json"
+            with open(tc0, 'r') as f:
                 reservations = json.load(f)
 
             # Verificar si el localizador está en las reservas
             localizer_found = False
             for reservation in reservations:
-                if reservation.get("Localizer") == localizer:
+                if reservation.get("LOCALIZER") == localizer:
                     localizer_found = True
-                    break
+                    return localizer
 
             if not localizer_found:
-                raise HotelManagementException("El localizador no se encuentra en el archivo de reservas")
+                raise HotelManagementException("El localizador no se corresponde con los datos almacenados")
             # Aquí deberías tener lógica para leer el archivo de reservas y hacer la verificación
 
             # Simulando la comprobación del localizador en el archivo de reservas
             if localizer != "LOCALIZER":
                 raise HotelManagementException("El localizador no se corresponde con los datos almacenados")
-
-
-            # Crear instancia de HotelStay
-            numdays = 3  # Suponiendo que el número de días siempre es 3
-            roomtype = "single"  # Suponiendo que el tipo de habitación siempre es "single"
-            hotel_stay = HotelStay(idcard=idcard, localizer=localizer, numdays=numdays, roomtype=roomtype)
-
-            # Guardar la información de la estancia en un archivo JSON
-            with open("estancias.json", "a") as estancias_file:
-                json.dump(hotel_stay.__dict__, estancias_file)
-                estancias_file.write('\n')
-
-            # Calcular la clave de la habitación utilizando SHA-256
-            room_key = hashlib.sha256(json.dumps(hotel_stay.__dict__).encode()).hexdigest()
-
-            return room_key
 
         except FileNotFoundError:
             raise HotelManagementException("No se encuentra el archivo de datos")
