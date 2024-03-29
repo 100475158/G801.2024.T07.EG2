@@ -1,11 +1,14 @@
 import hashlib
 import unittest
 import json
+from datetime import datetime
 from pathlib import Path
 import os
 from unittest import TestCase
 from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
 from src.main.python.UC3MTravel.HotelManager import HotelManager
+from src.main.python.UC3MTravel.HotelStay import HotelStay
+
 
 
 class TestGuestArrival(TestCase):

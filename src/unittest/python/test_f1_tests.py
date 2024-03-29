@@ -222,7 +222,7 @@ class test_room_reservation(TestCase):
                                                     arrival="14/10/2024",
                                                     numdays="2")
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "El Nombre demasiado largo")
+        self.assertEqual(cm.exception.message, "El Nombre es demasiado largo")
 
 
     def test_tipo_dato_phone_tc15(self):
