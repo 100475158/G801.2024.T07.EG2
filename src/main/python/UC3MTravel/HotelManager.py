@@ -276,18 +276,17 @@ class HotelManager:
         if not isinstance(room_key, str) or len(room_key) != 64:
             raise HotelManagementException("La cadena de entrada no contiene un código de habitación que pueda procesarse")
         #Verifico si esta en hexadecimal
-        #Cambio el room_key(que es un string) a una lista de enteros
-        lista_key=[]
-        for k in str(room_key):
-            lista_key.append(int(k))
-        #Cada entero tiene que estar entre 0 y 9 y si es una letra entre a y f
-            if k
+        hexadecimal_patron=  r"^[0-9a-fA-F]{64}$"
+        if re.match(hexadecimal_patron,room_key):
+            pass
+        else:
+            raise HotelManagementException("El código de habitación no es válido ")
         #Verifico si esta registrado en el archivo de estancias
         with open("estancias.json", "r") as estancias_file:
             for estancia in estancias_file:
                 data= json.loads(estancia)
                 if hashlib.sha256(json.dumps(data).encode()).hexdigest() == room_key:
-                    break
+                    pass
                 else:
                     raise HotelManagementException("El código de habitación no estaba registrado")
 
