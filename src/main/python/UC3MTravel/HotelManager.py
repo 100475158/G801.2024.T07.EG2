@@ -7,7 +7,7 @@ from .HotelStay import HotelStay
 import re
 import calendar
 import hashlib
-
+from datetime import datetime
 
 
 class HotelManager:
@@ -284,6 +284,51 @@ class HotelManager:
             raise HotelManagementException("Los datos del JSON no tienen valores válidos")
         except Exception as e:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
+
+  def guest_checkout(self,room_key):
+      try:
+        #Verifico si es valido el formato del room_key
+        if not isinstance(room_key, str) or len(room_key) != 64:
+            raise HotelManagementException("La cadena de entrada no contiene un código de habitación que pueda procesarse")
+        #Verifico si esta en hexadecimal
+        #Cambio el room_key(que es un string) a una lista de enteros
+        lista_key=[]
+        for k in str(room_key):
+            lista_key.append(int(k))
+        #Cada entero tiene que estar entre 0 y 9 y si es una letra entre a y f
+            if k
+        #Verifico si esta registrado en el archivo de estancias
+        with open("estancias.json", "r") as estancias_file:
+            for estancia in estancias_file:
+                data= json.loads(estancia)
+                if hashlib.sha256(json.dumps(data).encode()).hexdigest() == room_key:
+                    break
+                else:
+                    raise HotelManagementException("El código de habitación no estaba registrado")
+
+        #Obtengo la marca de tiempo actual en formato UTC
+        timestamp= datetime.utcnow().replace(tzinfo=timezone.utc).isoformat()
+        with open("estancias.json", "a") as estancias_file:
+            reservas = json.load(estancias_file)
+        # Verificar si departure(salida programada calculada en f2) coincide con timestamp(fecha de salida)
+            for reserva in reservas:
+                if reserva.get(HotelStay.departure) == timestamp:
+                    break
+                else:
+                    raise HotelManagementException("La fecha de salida no es válida")
+        #Registra la entrega en un archivo con la marca de tiempo (hora UTC) en que el cliente ha dejado la habitación
+        #y el código de la habitación
+        #se registra la salida en un fichero
+        with open("registro_entregas.json", "a") as fichero_entregas:
+            fichero_entregas.write(f"Marca de tiempo (UTC): {timestamp},Codigo de habitacion: {room_key}\n")
+        return True
+
+      except FileNotFoundError:
+          raise HotelManagementException("No se encuentra el archivo de datos")
+      except HotelManagementException as e:
+        raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
+
+
 def ReaddatafromJSOn(self, fi):
 
         try:
