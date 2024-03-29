@@ -287,7 +287,7 @@ class HotelManager:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
 
 
-      def guest_checkout(self,room_key):
+    def guest_checkout(self,room_key):
           try:
             # Verificar que room_key es una cadena hexadecimal válida de 64 caracteres
             if not isinstance(room_key, str) or len(room_key) != 64 or not all(
