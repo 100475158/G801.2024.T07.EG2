@@ -6,7 +6,8 @@ from .HotelReservation import HotelReservation
 from .HotelStay import HotelStay
 import re
 import calendar
-from .HotelStay import HotelStay
+import hashlib
+from datetime import datetime
 
 
 class HotelManager:
@@ -229,7 +230,7 @@ class HotelManager:
             # Captura y propaga la excepción
             raise e
 
-    def guest_arrival(self, input_file, output_file="hotel_stays.json"):
+    def guest_arrival(self, input_file):
         try:
             with open(input_file, 'r') as f:
                 data = json.load(f)
@@ -240,43 +241,25 @@ class HotelManager:
             if localizer is None or idcard is None:
                 raise HotelManagementException("El archivo JSON no tiene la estructura esperada")
 
-            # Verificar si el localizador está en el archivo de reservas y obtener datos adicionales
+            # Verificar si el localizador está en el archivo de reservas y coincide
             tc0 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/store_reservation.json"
             with open(tc0, 'r') as f:
                 reservations = json.load(f)
 
-            reservation_data = None
+            # Verificar si el localizador está en las reservas
+            localizer_found = False
             for reservation in reservations:
                 if reservation.get("LOCALIZER") == localizer:
-                    reservation_data = reservation
-                    break
+                    localizer_found = True
+                    return localizer
 
-            if reservation_data is None:
+            if not localizer_found:
                 raise HotelManagementException("El localizador no se corresponde con los datos almacenados")
+            # Aquí deberías tener lógica para leer el archivo de reservas y hacer la verificación
 
-            # Extraer datos relevantes de la reserva
-            numdays = reservation_data.get("_HotelReservation__num_days")
-            roomtype = reservation_data.get("_HotelReservation__roomtype")
-
-            # Crear instancia de HotelStay
-            stay = HotelStay(idcard, localizer, numdays, roomtype)
-
-            directorio = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
-            output_file = os.path.join(directorio, "hotel_stays.json")
-
-            # Guardar información de la estancia en el archivo
-            with open(output_file, 'a') as f:
-                stay_dict = {
-                    "alg": stay._HotelStay__alg,
-                    "typ": stay._HotelStay__type,
-                    "idcard": stay.idCard,
-                    "localizer": stay.localizer,
-                    "arrival": str(stay.arrival),
-                    "departure": str(stay.departure),
-                    "room_key": stay.room_key
-                }
-                json.dump(stay_dict, f)
-                f.write('\n')
+            # Simulando la comprobación del localizador en el archivo de reservas
+            if localizer != "LOCALIZER":
+                raise HotelManagementException("El localizador no se corresponde con los datos almacenados")
 
         except FileNotFoundError:
             raise HotelManagementException("No se encuentra el archivo de datos")
@@ -287,7 +270,7 @@ class HotelManager:
         except Exception as e:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
 
-"""  def guest_checkout(self,room_key):
+  def guest_checkout(self,room_key):
       try:
         #Verifico si es valido el formato del room_key
         if not isinstance(room_key, str) or len(room_key) != 64:
@@ -330,7 +313,7 @@ class HotelManager:
       except HotelManagementException as e:
         raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
 
-"""
+
 def ReaddatafromJSOn(self, fi):
 
         try:
