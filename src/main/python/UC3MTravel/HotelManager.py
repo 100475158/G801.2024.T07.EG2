@@ -315,7 +315,7 @@ class HotelManager:
             #Verifico si esta registrado en el archivo de estancias
             # Obtengo la marca de tiempo actual en formato UTC
             fecha_actual = datetime.utcnow().replace(tzinfo=timezone.utc)
-            tcc0= str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/store_reservation.json"
+            tcc0= str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/hotel_stays.json"
             with open(tcc0, "r") as estancias_file:
                 reservas= json.load(estancias_file)
                 registrado = False
