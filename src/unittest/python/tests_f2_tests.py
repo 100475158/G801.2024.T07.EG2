@@ -12,14 +12,18 @@ from src.main.python.UC3MTravel.HotelStay import HotelStay
 
 
 class TestGuestArrival(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        json_files_path = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
+        cls.file_store = json_files_path + "hotel_stays.json"
+        if os.path.isfile(cls.file_store):
+            os.remove(cls.file_store)
     def test_guest_arrival_test_tc1(self):
         #Test valido
         checkin = HotelManager()
         tc1 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tcc1.json"
         key = checkin.guest_arrival(tc1)
         print(key)
-
-
 
     def test_guest_arrival_test_tc2(self):
         #Duplicación del nodo JSON

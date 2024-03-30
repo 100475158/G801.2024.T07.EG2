@@ -233,28 +233,68 @@ class HotelManager:
 
     def guest_arrival(self, input_file):
         try:
+            # Cargar los datos de entrada
             with open(input_file, 'r') as f:
                 data = json.load(f)
+
+            # Obtener los valores necesarios del archivo de entrada
             localizer = data.get("Localizer")
             idcard = data.get("IdCard")
+
             if localizer is None or idcard is None:
                 raise HotelManagementException("El archivo JSON no tiene la estructura esperada")
-            # Verificar si el localizador está en el archivo de reservas y coincide
+
+            # Verificar si el localizador está en el archivo de reservas y obtener datos adicionales
             tc0 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/store_reservation.json"
             with open(tc0, 'r') as f:
                 reservations = json.load(f)
-            # Verificar si el localizador está en las reservas
-            localizer_found = False
+
+            reservation_data = None
             for reservation in reservations:
                 if reservation.get("LOCALIZER") == localizer:
-                    localizer_found = True
-                    return localizer
-            if not localizer_found:
+                    reservation_data = reservation
+                    break
+
+            if reservation_data is None:
                 raise HotelManagementException("El localizador no se corresponde con los datos almacenados")
-            # Aquí deberías tener lógica para leer el archivo de reservas y hacer la verificación
-            # Simulando la comprobación del localizador en el archivo de reservas
-            if localizer != "LOCALIZER":
-                raise HotelManagementException("El localizador no se corresponde con los datos almacenados")
+
+            # Extraer datos relevantes de la reserva
+            numdays = reservation_data.get("_HotelReservation__num_days")
+            roomtype = reservation_data.get("_HotelReservation__roomtype")
+
+            # Verificar si el localizador ya existe en el archivo de salida
+            directorio = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
+            output_file = os.path.join(directorio, "hotel_stays.json")
+
+            if os.path.exists(output_file):
+                with open(output_file, 'r') as f:
+                    for line in f:
+                        existing_stay = json.loads(line)
+                        if existing_stay.get("localizer") == localizer:
+                            raise HotelManagementException(
+                                "La reserva con este localizador ya existe en el archivo de salida")
+            # Crear instancia de HotelStay
+            stay = HotelStay(idcard, localizer, numdays, roomtype)
+
+            # Guardar información de la estancia en el archivo "hotel_stays.json"
+            directorio = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
+            output_file = os.path.join(directorio, "hotel_stays.json")
+            with open(output_file, 'a') as f:
+                stay_dict = {
+                    "alg": stay._HotelStay__alg,
+                    "typ": stay._HotelStay__type,
+                    "idcard": stay.idCard,
+                    "localizer": stay.localizer,
+                    "arrival": str(stay.arrival),
+                    "departure": str(stay.departure),
+                    "room_key": stay.room_key
+                }
+                json.dump(stay_dict, f)
+                f.write('\n')
+
+            # Retornar la clave de la habitación
+            return stay.room_key
+
         except FileNotFoundError:
             raise HotelManagementException("No se encuentra el archivo de datos")
         except json.JSONDecodeError:
@@ -295,8 +335,6 @@ class HotelManager:
                             raise HotelManagementException("La fecha de salida no es válida")
                 if not registrado:
                     raise HotelManagementException("El código de habitación no estaba registrado")
-
-
 
           except FileNotFoundError:
             raise HotelManagementException("No se encuentra el archivo de datos")
