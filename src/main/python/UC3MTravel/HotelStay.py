@@ -1,5 +1,5 @@
 ''' Class HotelStay (GE2.2) '''
-from datetime import datetime , timedelta
+from datetime import datetime, timedelta
 import hashlib
 
 class HotelStay():

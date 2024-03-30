@@ -20,6 +20,7 @@ class TestGuestArrival(TestCase):
         print(key)
 
 
+
     def test_guest_arrival_test_tc2(self):
         #Duplicación del nodo JSON
         checkin=HotelManager()
