@@ -270,7 +270,7 @@ class HotelManager:
         except Exception as e:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
 
-  def guest_checkout(self,room_key):
+   def guest_checkout(self,room_key):
       try:
         #Verifico si es valido el formato del room_key
         if not isinstance(room_key, str) or len(room_key) != 64:
