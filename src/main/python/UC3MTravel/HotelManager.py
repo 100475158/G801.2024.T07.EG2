@@ -314,31 +314,31 @@ class HotelManager:
             #Verifico si esta registrado en el archivo de estancias
             # Obtengo la marca de tiempo actual en formato UTC
             fecha_actual = datetime.utcnow().replace(tzinfo=timezone.utc)
-            tcc0= str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/hotel_stays.json"
-            with open(tcc0, "r") as estancias_file:                                                                     #Nodo 4
-                reservas= json.load(estancias_file)                                                                     #Nodo 5
+            tcc0= str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/hotel_stays.json"               #Nodo 4
+            with open(tcc0, "r") as estancias_file:
+                reservas= json.load(estancias_file)
                 registrado = False
-                for reserva in reservas:                                                                                #Nodo 6
-                    if reserva.get("room_key") == room_key:                                                             #Nodo 7
+                for reserva in reservas:                                                                                #Nodo 5
+                    if reserva.get("room_key") == room_key:                                                             #Nodo 6
                 #Verificar si departure(salida programada calculada en f2) coincide con fecha_actual(fecha de salida)
-                        fecha_salida= datetime.strptime(reserva.get("departure"),"%Y-%m-%d %H:%M:%S.%f%z")     #Nodo 8
-                        if fecha_salida== fecha_actual:                                                                 #Nodo 9
+                        fecha_salida= datetime.strptime(reserva.get("departure"),"%Y-%m-%d %H:%M:%S.%f%z")     #Nodo 7
+                        if fecha_salida== fecha_actual:                                                                 #Nodo 8
                             # Registra la entrega en un archivo con la marca de tiempo (hora UTC) en que el cliente ha dejado la habitación
                             # y el código de la habitación
                             # se registra la salida en un fichero
-                            with open("registro_entregas.json", "a") as fichero_entregas:                               #Nodo 10
+                            with open("registro_entregas.json", "a") as fichero_entregas:                               #Nodo 9
                                 fichero_entregas.write(f"Marca de tiempo (UTC): {fecha_actual},Codigo de habitacion: {room_key}\n")
                             registrado=True
-                            return True                                                                                 #Nodo 11
-                        else:
+                            return True                                                                                 #Nodo 10
+                        else:                                                                                           #Nodo 11
                             raise HotelManagementException("La fecha de salida no es válida")                           #Nodo 12
-                if not registrado:
-                    raise HotelManagementException("El código de habitación no estaba registrado")                      #Nodo 13
+                if not registrado:                                                                                      #Nodo 13
+                    raise HotelManagementException("El código de habitación no estaba registrado")                      #Nodo 14
 
-          except FileNotFoundError:
-            raise HotelManagementException("No se encuentra el archivo de datos")                                       #Nodo 14
-          except HotelManagementException as e:
-            raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")                                 #Nodo 15
+          except FileNotFoundError:                                                                                     #Nodo 15
+            raise HotelManagementException("No se encuentra el archivo de datos")                                       #Nodo 16
+          except HotelManagementException as e:                                                                         #Nodo 17
+            raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")                                 #Nodo 18
 #Nodo F
 
 def ReaddatafromJSOn(self, fi):
