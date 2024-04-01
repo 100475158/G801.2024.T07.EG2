@@ -13,5 +13,10 @@ default_task = "publish"
 
 
 @init
+def initialize(project):
+    project.build_depends_on("coverage")
+
+    project.set_property("dir_source_unittest_python", "src/test/python")
+    project.set_property("unittest_module_glob", "*_tests")
 def set_properties(project):
     pass
