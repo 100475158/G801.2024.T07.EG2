@@ -302,43 +302,49 @@ class HotelManager:
         except Exception as e:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
 
-
-
-    def guest_checkout(self,room_key):
-          try:
+    def guest_checkout(self, room_key):
+        try:
             # Verificar que room_key es una cadena hexadecimal válida de 64 caracteres
-            if not isinstance(room_key, str) or len(room_key) != 64 or not all(caracter in "0123456789abcdefABCDEF" for caracter in room_key):  #Nodo 1
-                raise HotelManagementException("La cadena de entrada no contiene un código de habitación válido")       #Nodo 2
-            #Verifico si esta registrado en el archivo de estancias
-            #Obtengo la marca de tiempo actual en formato UTC
-            fecha_actual = datetime.utcnow().replace(tzinfo=timezone.utc)
-            tcc0= str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/hotel_stays.json"
-            with open(tcc0, "r") as estancias_file:                                                                     #Nodo 3
-                reservas= json.load(estancias_file)                                                                     #Nodo 4
-                for reserva in reservas:                                                                                #Nodo 5
-                    if reserva.get("room_key") == room_key:                                                             #Nodo 6
-                        #Verificar si departure(salida programada calculada en f2) coincide con fecha_actual(fecha de salida)
-                        fecha_salida= datetime.strptime(reserva.get("departure"),"%Y-%m-%d %H:%M:%S.%f%z")
-                        if fecha_salida== fecha_actual:                                                                 #Nodo 7
-                            # Registra la entrega en un archivo con la marca de tiempo (hora UTC) en que el cliente ha dejado la habitación
-                            # y el código de la habitación
-                            # se registra la salida en un fichero
-                            with open("registro_entregas.json", "a") as fichero_entregas:                               #Nodo 8
-                                fichero_entregas.write(f"Marca de tiempo (UTC): {fecha_actual},Codigo de habitacion: {room_key}\n") #Nodo 9
-                            return True                                                                                 #Nodo 10
-                        else:
-                            raise HotelManagementException("La fecha de salida no es válida")                           #Nodo 14
+            if not isinstance(room_key, str) or len(room_key) != 64 or not all(
+                    caracter in "0123456789abcdefABCDEF" for caracter in room_key):  # Nodo 1
+                raise HotelManagementException(
+                    "La cadena de entrada no contiene un código de habitación válido")  # Nodo 2
+
+            # Verifico si esta registrado en el archivo de estancias
+            tcc0 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/hotel_stays.json"
+            with open(tcc0, "r") as estancias_file:  # Nodo 3
+                reserva = json.load(estancias_file)  # Nodo 4                       #Nodo 5
+                if reserva.get("room_key") == room_key:  # Nodo 6
+                    # Obtengo la marca de tiempo actual en formato UTC
+                    fecha_actual = datetime.utcnow().replace(tzinfo=timezone.utc)
+                    print(fecha_actual)
+                    # Verificar si departure(salida programada calculada en f2) coincide con fecha_actual(fecha de salida)
+                    fecha_salida = datetime.strptime(reserva.get("departure"), "%Y-%m-%d %H:%M:%S")
+                    print(fecha_salida)
+                    if fecha_salida == fecha_actual:  # Nodo 7
+                        # Registra la entrega en un archivo con la marca de tiempo (hora UTC) en que el cliente ha dejado la habitación
+                        # y el código de la habitación
+                        # se registra la salida en un fichero
+                        directorio = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
+                        checkouts_file_path = directorio + "check-outs.json"
+                        with open(checkouts_file_path, "a") as checkouts_file:
+                            data = {"room_key": room_key, "departure": fecha_actual.strftime("%Y-%m-%d %H:%M:%S")}
+                            json.dump(data, checkouts_file)
+                        return True
                     else:
-                        raise HotelManagementException("El código de habitación no estaba registrado")                  #Nodo 13
+                        raise HotelManagementException("La fecha de salida no es válida")  # Nodo 14
+                else:
+                    raise HotelManagementException("El código de habitación no estaba registrado")  # Nodo 13
 
-          except FileNotFoundError:
-            raise HotelManagementException("No se encuentra el archivo de datos")                                       #Nodo 12
-          except ValueError:
-              raise HotelManagementException("El código de habitación no es válido ")
-          except HotelManagementException as e:
+        except FileNotFoundError:
+            raise HotelManagementException("No se encuentra el archivo de datos")  # Nodo 12
+        except HotelManagementException as e:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
+        except PermissionError:
+          raise HotelManagementException("No se puede abrir el archivo")  # Nodo 15
 
-#Nodo F
+
+# Nodo F
 
 def ReaddatafromJSOn(self, fi):
 

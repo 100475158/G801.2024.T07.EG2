@@ -1,4 +1,5 @@
 from pathlib import Path
+import unittest
 import os
 from unittest import TestCase
 from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
@@ -524,4 +525,5 @@ class TestGuestArrival(TestCase):
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El archivo no tiene formato JSON")
 
-
+if __name__ == '__main__':
+    unittest.main()
