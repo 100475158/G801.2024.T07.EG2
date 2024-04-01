@@ -41,22 +41,41 @@ class TestGuestArrival(TestCase):
         checkout = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             checkout.guest_checkout("770c547dc8adacd3860f47b8c9e8f6815269f967478a141e458aa4104dfab24f")
-        self.assertEqual(cm.exception.message, "No se encuentra el archivo hotel_stays.json")
+        self.assertEqual(cm.exception.message, "No se encuentra el archivo de datos")
 
     @freeze_time("2024-04-02 22:32:31.638316")
     def test_guest_checkout_test_tc4(self):
-        # Room key no es valido
+        # El room key no coincide con el del archivo de estancias
         checkout = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             checkout.guest_checkout("770c547dc8adacd3860f47b8c9e8f6815269f967478a141e458aa4104dfab24f")
         self.assertEqual(cm.exception.message,
-                         "Error de procesamiento interno: La cadena de entrada no contiene un código de habitación válido")
+                         "Error de procesamiento interno: El código de habitación no estaba registrado")
 
     @freeze_time("2024-04-02 22:32:31.638316")
-    def test_guest_checkout_test_tc3(self):
-        # Room key no es valido
+    def test_guest_checkout_test_tc5(self):
+        # La fecha de salida no coincide con la esperada
         checkout = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             checkout.guest_checkout("770c547dc8adacd3860f47b8c9e8f6815269f967478a141e458aa4104dfab24f")
         self.assertEqual(cm.exception.message,
-                         "Error de procesamiento interno: La cadena de entrada no contiene un código de habitación válido")
+                         "Error de procesamiento interno: La fecha de salida no es válida")
+
+
+    @freeze_time("2024-04-02 22:32:31.638316")
+    def test_guest_checkout_test_tc6(self):
+        # No se encuentra el archivo registro_entregas.json
+        checkout = HotelManager()
+        with self.assertRaises(HotelManagementException) as cm:
+            checkout.guest_checkout("770c547dc8adacd3860f47b8c9e8f6815269f967478a141e458aa4104dfab24f")
+        self.assertEqual(cm.exception.message,
+                         "No se encuentra el archivo de datos")
+
+    @freeze_time("2024-04-02 22:32:31.638316")
+    def test_guest_checkout_test_tc7(self):
+        # El room_key no se encuentra en el archivos de estancias (el archivo sí existe)
+        checkout = HotelManager()
+        with self.assertRaises(HotelManagementException) as cm:
+            checkout.guest_checkout("770c547dc8adacd3860f47b8c9e8f6815269f967478a141e458aa4104dfab24f")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El código de habitación no estaba registrado")
