@@ -315,13 +315,15 @@ class HotelManager:
             with open(tcc0, "r") as estancias_file:  # Nodo 3
                 reserva = json.load(estancias_file)  # Nodo 4                       #Nodo 5
                 if reserva.get("room_key") == room_key:  # Nodo 6
-                    # Obtengo la marca de tiempo actual en formato UTC
+                    # Obtener la fecha y hora actual en formato UTC
                     fecha_actual = datetime.utcnow().replace(tzinfo=timezone.utc)
-                    print(fecha_actual)
+
+                    # Formatear la fecha y hora actual en el formato deseado
+                    fecha_actual_formateada = fecha_actual.strftime("%Y-%m-%d %H:%M:%S")
+
                     # Verificar si departure(salida programada calculada en f2) coincide con fecha_actual(fecha de salida)
-                    fecha_salida = datetime.strptime(reserva.get("departure"), "%Y-%m-%d %H:%M:%S")
-                    print(fecha_salida)
-                    if fecha_salida == fecha_actual:  # Nodo 7
+                    fecha_salida = reserva.get("departure")
+                    if fecha_salida == fecha_actual_formateada:  # Nodo 7
                         # Registra la entrega en un archivo con la marca de tiempo (hora UTC) en que el cliente ha dejado la habitación
                         # y el código de la habitación
                         # se registra la salida en un fichero
