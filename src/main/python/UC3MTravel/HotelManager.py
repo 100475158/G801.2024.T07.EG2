@@ -343,7 +343,7 @@ class HotelManager:
         except HotelManagementException as e:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
         except PermissionError:
-          raise HotelManagementException("No se puede abrir el archivo")  # Nodo 15
+            raise HotelManagementException("No se puede abrir el archivo")  # Nodo 15
 
 
 # Nodo F
