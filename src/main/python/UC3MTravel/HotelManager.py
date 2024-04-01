@@ -6,9 +6,7 @@ from .HotelReservation import HotelReservation
 from .HotelStay import HotelStay
 import re
 import calendar
-import hashlib
 from datetime import datetime, timezone
-
 
 
 class HotelManager:

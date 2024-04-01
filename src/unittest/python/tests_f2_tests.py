@@ -1,15 +1,9 @@
-import hashlib
-import unittest
-import json
-from datetime import datetime
 from pathlib import Path
 import os
 from unittest import TestCase
 from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
 from src.main.python.UC3MTravel.HotelManager import HotelManager
-from src.main.python.UC3MTravel.HotelStay import HotelStay
-
-
+from freezegun import freeze_time
 
 class TestGuestArrival(TestCase):
     @classmethod
@@ -18,6 +12,8 @@ class TestGuestArrival(TestCase):
         cls.file_store = json_files_path + "hotel_stays.json"
         if os.path.isfile(cls.file_store):
             os.remove(cls.file_store)
+
+    @freeze_time("2024-10-14")
     def test_guest_arrival_test_tc1(self):
         #Test valido
         checkin = HotelManager()
