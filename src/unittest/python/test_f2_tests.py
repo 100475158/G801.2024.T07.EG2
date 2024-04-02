@@ -1,11 +1,14 @@
+"""
+Este módulo contiene pruebas para la F3.
+"""
+import os
+import sys
 from pathlib import Path
 import unittest
 from unittest import TestCase
 from freezegun import freeze_time
-import test_f1_tests
-
-import os
-import sys
+from UC3MTravel.HotelManagementException import HotelManagementException
+from UC3MTravel.HotelManager import HotelManager
 
 # Obtenemos el directorio actual del script
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -14,11 +17,13 @@ src_dir = os.path.join(current_dir, '..', '..', '..', 'main', 'python')
 # Añadimos la ruta del directorio src al sys.path
 sys.path.append(src_dir)
 
-from UC3MTravel.HotelManagementException import HotelManagementException
-from UC3MTravel.HotelManager import HotelManager
 
 class TestGuestArrival(TestCase):
+    """
+    Clase principal para pruebas relacionadas con la llegada de huéspedes.
+    """
     file_store = None
+
     @classmethod
     def setUpClass(cls):
         json_files_path = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
@@ -28,49 +33,52 @@ class TestGuestArrival(TestCase):
 
     @freeze_time("2024-10-14")
     def test_guest_arrival_test_tc1(self):
-        #Test valido
+        # Test valido
         checkin = HotelManager()
         tc1 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tcc1.json"
         checkin.guest_arrival(tc1)
 
     def test_guest_arrival_test_tc2(self):
-        #Duplicación del nodo JSON
-        checkin=HotelManager()
+        # Duplicación del nodo JSON
+        checkin = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             tc2 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc2.json"
             checkin.guest_arrival(tc2)
         self.assertEqual(cm.exception.message, "El archivo no tiene formato JSON")
 
     def test_guest_arrival_test_tc3(self):
-        #Duplicación del nodo Inicio
-        checkin=HotelManager()
+        # Duplicación del nodo Inicio
+        checkin = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             tc3 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc3.json"
             checkin.guest_arrival(tc3)
         self.assertEqual(cm.exception.message, "El archivo no tiene formato JSON")
 
     def test_guest_arrival_test_tc4(self):
-        #Duplicación del nodo Datos
-        checkin=HotelManager()
+        # Duplicación del nodo Datos
+        checkin = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             tc4 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc4.json"
             checkin.guest_arrival(tc4)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+
     def test_guest_arrival_test_tc5(self):
-        #Duplicación del nodo Fin
-        checkin=HotelManager()
+        # Duplicación del nodo Fin
+        checkin = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             tc5 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc5.json"
             checkin.guest_arrival(tc5)
         self.assertEqual(cm.exception.message, "El archivo no tiene formato JSON")
 
     def test_guest_arrival_test_tc6(self):
-        #Duplicación del nodo Campo1
-        checkin=HotelManager()
+        # Duplicación del nodo Campo1
+        checkin = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             tc6 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc6.json"
             checkin.guest_arrival(tc6)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc7(self):
         # Duplicación del nodo Separador
@@ -104,7 +112,8 @@ class TestGuestArrival(TestCase):
         with self.assertRaises(HotelManagementException) as cm:
             tc10 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc10.json"
             checkin.guest_arrival(tc10)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc11(self):
         # Duplicación del nodo Comillas de después de Etiqueta_dato1
@@ -136,7 +145,8 @@ class TestGuestArrival(TestCase):
         with self.assertRaises(HotelManagementException) as cm:
             tc14 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc14.json"
             checkin.guest_arrival(tc14)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc15(self):
         # Duplicación del nodo Comillas del final del Campo 1
@@ -160,7 +170,8 @@ class TestGuestArrival(TestCase):
         with self.assertRaises(HotelManagementException) as cm:
             tc17 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc17.json"
             checkin.guest_arrival(tc17)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc18(self):
         # Duplicación del nodo Comillas de después de Etiqueta_dato2
@@ -192,7 +203,8 @@ class TestGuestArrival(TestCase):
         with self.assertRaises(HotelManagementException) as cm:
             tc21 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc21.json"
             checkin.guest_arrival(tc21)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc22(self):
         # Duplicación del nodo Comillas del Campo 2
@@ -224,7 +236,8 @@ class TestGuestArrival(TestCase):
         with self.assertRaises(HotelManagementException) as cm:
             tc25 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc25.json"
             checkin.guest_arrival(tc25)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc26(self):
         # Eliminación del nodo Fin
@@ -240,7 +253,8 @@ class TestGuestArrival(TestCase):
         with self.assertRaises(HotelManagementException) as cm:
             tc27 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc27.json"
             checkin.guest_arrival(tc27)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc28(self):
         # Eliminación del nodo Separador
@@ -248,7 +262,8 @@ class TestGuestArrival(TestCase):
         with self.assertRaises(HotelManagementException) as cm:
             tc28 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc28.json"
             checkin.guest_arrival(tc28)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc29(self):
         # Eliminación del nodo Campo2
@@ -257,7 +272,6 @@ class TestGuestArrival(TestCase):
             tc29 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc29.json"
             checkin.guest_arrival(tc29)
         self.assertEqual(cm.exception.message, "El archivo no tiene formato JSON")
-
 
     def test_guest_arrival_test_tc30(self):
         # Eliminacion nodo 8 comillas
@@ -274,7 +288,9 @@ class TestGuestArrival(TestCase):
             tc31 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc31.json"
             checkin.guest_arrival(tc31)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+
     def test_guest_arrival_test_tc32(self):
         # Eliminacion nodo 10 comillas
         checkin = HotelManager()
@@ -309,7 +325,8 @@ class TestGuestArrival(TestCase):
             tc35 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc35.json"
             checkin.guest_arrival(tc35)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc36(self):
         # Eliminacion nodo 16 comillas
@@ -336,7 +353,8 @@ class TestGuestArrival(TestCase):
             tc38 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc38.json"
             checkin.guest_arrival(tc38)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc39(self):
         # Eliminacion nodo 19 comillas
@@ -372,7 +390,8 @@ class TestGuestArrival(TestCase):
             tc42 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc42.json"
             checkin.guest_arrival(tc42)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc43(self):
         # Eliminacion nodo 25 comillas
@@ -426,7 +445,8 @@ class TestGuestArrival(TestCase):
             tc48 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc48.json"
             checkin.guest_arrival(tc48)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc49(self):
         # Modificacion nodo 31 "" por ¿
@@ -462,7 +482,8 @@ class TestGuestArrival(TestCase):
             tc52 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc52.json"
             checkin.guest_arrival(tc52)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc53(self):
         # Modificacion nodo 37 " por /
@@ -489,7 +510,8 @@ class TestGuestArrival(TestCase):
             tc55 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc55.json"
             checkin.guest_arrival(tc55)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El archivo JSON no tiene la estructura esperada")
 
     def test_guest_arrival_test_tc56(self):
         # Modificacion nodo 40 " por .
@@ -525,7 +547,8 @@ class TestGuestArrival(TestCase):
             tc59 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tc59.json"
             checkin.guest_arrival(tc59)
         print(cm.exception.message)
-        self.assertEqual(cm.exception.message, "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
+        self.assertEqual(cm.exception.message,
+                         "Error de procesamiento interno: El localizador no se corresponde con los datos almacenados")
 
     def test_guest_arrival_test_tc60(self):
         # Modificacion nodo 46 " por ,
@@ -535,6 +558,7 @@ class TestGuestArrival(TestCase):
             checkin.guest_arrival(tc60)
         print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El archivo no tiene formato JSON")
+
 
 if __name__ == '__main__':
     unittest.main()
