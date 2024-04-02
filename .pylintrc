@@ -303,7 +303,7 @@ max-locals=16
 max-parents=8
 
 # Maximum number of public methods for a class (see R0904).
-max-public-methods=25
+max-public-methods=65
 
 # Maximum number of return / yield for function / method body.
 max-returns=7
