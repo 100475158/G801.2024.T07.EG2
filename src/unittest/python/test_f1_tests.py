@@ -18,7 +18,6 @@ from UC3MTravel.HotelManager import HotelManager
 
 class test_room_reservation(TestCase):
     file_store = None
-
     @classmethod
     def setUpClass(cls):
         json_files_path = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
@@ -58,7 +57,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "La tarjeta de credito no cumple el algoritmo de Luhn")
 
     def test_tipo_dato_CD_tc3(self):
@@ -72,7 +70,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "La tarjeta de credito no es un entero")
 
     def test_mas_long_CD_tc4(self):
@@ -86,7 +83,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de la tarjeta de credito es demasiado largo")
 
     def test_menos_long_CD_tc5(self):
@@ -100,7 +96,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de la tarjeta de credito es demasiado corto")
 
     def test_tipo_dato_ID_tc6(self):
@@ -114,7 +109,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El formato DNI no es correcto")
 
     def test_mas_long_ID_tc7(self):
@@ -128,7 +122,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El DNI es demasiado largo")
 
     def test_menos_long_ID_tc8(self):
@@ -142,7 +135,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El DNI es demasiado corto")
 
     def test_tipo_dato_nombre_tc9(self):
@@ -156,7 +148,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "Formato del Nombre incorrecto")
 
     def test_valid_tc10(self):
@@ -169,7 +160,6 @@ class test_room_reservation(TestCase):
                                                 room_type="SINGLE",
                                                 arrival="14/10/2024",
                                                 numdays="2")
-        print("OK")
         self.assertEqual(valor, "ddd1ae3b83051f1ff4dbdbae022ce195")
 
         with open(self.file_store, "r", encoding="utf-8") as file:
@@ -191,7 +181,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El nombre tiene menos de 2 cadenas de caracteres")
 
     def test_4_cadenas_nombre_tc12(self):
@@ -205,7 +194,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El nombre tiene mas de 3 cadenas de caracteres")
 
     def test_menos_long_nombre_tc13(self):
@@ -219,7 +207,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El Nombre es demasiado corto")
 
     def test_mas_long_nombre_tc14(self):
@@ -233,7 +220,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El Nombre es demasiado largo")
 
     def test_tipo_dato_phone_tc15(self):
@@ -247,7 +233,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El formato del Número de teléfono no es válido")
 
     def test_mas_long_phone_tc16(self):
@@ -261,7 +246,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El telefono tiene mas de 9 digitos")
 
     def test_menos_long_phone_tc17(self):
@@ -275,7 +259,6 @@ class test_room_reservation(TestCase):
                                                     room_type="SINGLE",
                                                     arrival="14/10/2024",
                                                     numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El telefono tiene menos de 9 digitos")
 
     def test_habitacion_incorrecta_tc18(self):
@@ -289,7 +272,6 @@ class test_room_reservation(TestCase):
                                             room_type="5U1T3",
                                             arrival="14/10/2024",
                                             numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "La Habitación no es válida")
 
     def test_valid_tc19(self):
@@ -302,7 +284,6 @@ class test_room_reservation(TestCase):
                                                 room_type="DOUBLE",
                                                 arrival="14/10/2024",
                                                 numdays="2")
-        print("OK")
         self.assertEqual(valor, "46324af73dfb272314924e6a876dc2ac")
 
         with open(self.file_store, "r", encoding="utf-8") as file:
@@ -323,7 +304,6 @@ class test_room_reservation(TestCase):
                                                 room_type="SUITE",
                                                 arrival="14/10/2024",
                                                 numdays="2")
-        print("OK")
         self.assertEqual(valor, "5d6cfb6170189551fa11ffd37b616140")
 
         with open(self.file_store, "r", encoding="utf-8") as file:
@@ -358,7 +338,6 @@ class test_room_reservation(TestCase):
                                             room_type="SINGLE",
                                             arrival="1401602024",
                                             numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El formato de la llegada no es correcto")
 
     def test_mas_long_llegada_tc23(self):
@@ -372,7 +351,6 @@ class test_room_reservation(TestCase):
                                             room_type="SINGLE",
                                             arrival="14/10/20245",
                                             numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "La llegada es mayor de 10 caracteres")
 
     def test_menos_long_llegada_tc24(self):
@@ -386,7 +364,6 @@ class test_room_reservation(TestCase):
                                             room_type="SINGLE",
                                             arrival="14/6/2024",
                                             numdays="2")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "La llegada es menor de 10 caracteres")
 
     def test_tipo_dato_num_dias_tc25(self):
@@ -400,7 +377,6 @@ class test_room_reservation(TestCase):
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
                                             numdays="X")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El formato del numero de dias no es correcto")
 
     def test_mas_num_dias_tc26(self):
@@ -414,7 +390,6 @@ class test_room_reservation(TestCase):
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
                                             numdays="11")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de dias es mayor de 10")
 
     def test_menos_num_dias_tc27(self):
@@ -428,7 +403,6 @@ class test_room_reservation(TestCase):
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
                                             numdays="0")
-        print(cm.exception.message)
         self.assertEqual(cm.exception.message, "El numero de dias es menor de 1")
 
 

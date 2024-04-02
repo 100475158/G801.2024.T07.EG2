@@ -17,13 +17,13 @@ from UC3MTravel.HotelManager import HotelManager
 
 
 class TestGuestArrival(TestCase):
+    file_store = None
     @classmethod
     def setUpClass(cls):
         json_files_path = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
-        cls.file_store2 = json_files_path + "registro_entregas.json"
-        if os.path.isfile(cls.file_store2):
-            os.remove(cls.file_store2)
-
+        cls.file_store = json_files_path + "registro_entregas.json"
+        if os.path.isfile(cls.file_store):
+            os.remove(cls.file_store)
     @freeze_time("2024-10-16")
     def test_guest_checkout_test_tc1(self):
         # Test valido

@@ -2,6 +2,7 @@ from pathlib import Path
 import unittest
 from unittest import TestCase
 from freezegun import freeze_time
+import test_f1_tests
 
 import os
 import sys
@@ -17,6 +18,7 @@ from UC3MTravel.HotelManagementException import HotelManagementException
 from UC3MTravel.HotelManager import HotelManager
 
 class TestGuestArrival(TestCase):
+    file_store = None
     @classmethod
     def setUpClass(cls):
         json_files_path = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
@@ -29,8 +31,7 @@ class TestGuestArrival(TestCase):
         #Test valido
         checkin = HotelManager()
         tc1 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/entradas_f2/tcc1.json"
-        key = checkin.guest_arrival(tc1)
-        print(key)
+        checkin.guest_arrival(tc1)
 
     def test_guest_arrival_test_tc2(self):
         #Duplicación del nodo JSON
