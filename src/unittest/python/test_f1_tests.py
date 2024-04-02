@@ -1,11 +1,20 @@
 import unittest
 import json
 from pathlib import Path
-import os
 from unittest import TestCase
-from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
-from src.main.python.UC3MTravel.HotelManager import HotelManager
+import os
+import sys
 
+# Obtenemos el directorio actual del script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Obtenemos la ruta del directorio src
+src_dir = os.path.join(current_dir, '..', '..', '..', 'main', 'python')
+# Añadimos la ruta del directorio src al sys.path
+sys.path.append(src_dir)
+
+# Ahora podemos importar el módulo HotelManagementException
+from UC3MTravel.HotelManagementException import HotelManagementException
+from UC3MTravel.HotelManager import HotelManager
 
 class test_room_reservation(TestCase):
     file_store = None

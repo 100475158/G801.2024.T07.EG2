@@ -1,9 +1,19 @@
 from pathlib import Path
 from unittest import TestCase
-from src.main.python.UC3MTravel.HotelManagementException import HotelManagementException
-from src.main.python.UC3MTravel.HotelManager import HotelManager
 from freezegun import freeze_time
 import os
+import sys
+
+# Obtenemos el directorio actual del script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Obtenemos la ruta del directorio src
+src_dir = os.path.join(current_dir, '..', '..', '..', 'main', 'python')
+# Añadimos la ruta del directorio src al sys.path
+sys.path.append(src_dir)
+
+from UC3MTravel.HotelManagementException import HotelManagementException
+from UC3MTravel.HotelManager import HotelManager
+
 
 
 class TestGuestArrival(TestCase):
