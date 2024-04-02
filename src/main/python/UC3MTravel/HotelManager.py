@@ -15,9 +15,9 @@ class HotelManager:
 
 
     def room_reservation(self,
-                         IDCARD,
-                         creditcardNumb,
-                         nAMeAndSURNAME,
+                         idcard,
+                         creditcardnumb,
+                         nameandsurname,
                          phonenumber,
                          arrival,
                          room_type,
@@ -169,9 +169,9 @@ class HotelManager:
 
             #Llamamos a las funciones despues de definirlas
         try:
-            validatecreditcard(creditcardNumb)
-            validate_id_card(IDCARD)
-            validate_name(nAMeAndSURNAME)
+            validatecreditcard(creditcardnumb)
+            validate_id_card(idcard)
+            validate_name(nameandsurname)
             validate_phone(phonenumber)
             validate_room(room_type)
             validate_arrival(arrival)
@@ -179,7 +179,7 @@ class HotelManager:
 
             # Si todos los datos son correctos, generas la reserva y obtienes el localizador
             # Obtener la representación en cadena de la reserva mediante __str__
-            reserva = HotelReservation(IDCARD, creditcardNumb, nAMeAndSURNAME, phonenumber, arrival, room_type, numdays)
+            reserva = HotelReservation(idcard, creditcardnumb, nameandsurname, phonenumber, arrival, room_type, numdays)
             localizer = reserva.LOCALIZER  # Aquí invocas el método LOCALIZER
 
             # Crear un diccionario con los datos de la reserva y el localizador
@@ -359,7 +359,7 @@ def ReaddatafromJSOn(self, fi):
         try:
             c = DATA["CreditCard"]
             p = DATA["phoneNumber"]
-            req = HotelReservation(IDCARD="12345678Z", creditcardNumb=c, nAMeAndSURNAME="John Doe", phonenumber=p, room_type="single", numdays=3)
+            req = HotelReservation(idcard="12345678Z", creditcardnumb=c, nameandsurname="John Doe", phonenumber=p, room_type="single", numdays=3)
         except KeyError as e:
             raise HotelManagementException("JSON Decode Error - Invalid JSON Key") from e
         if not self.validatecreditcard(c):

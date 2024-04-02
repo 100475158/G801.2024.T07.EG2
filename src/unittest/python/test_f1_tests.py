@@ -36,9 +36,9 @@ class test_room_reservation(TestCase):
         CASI todas las clases válidas
         """
         my_reservation = HotelManager()
-        valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                                IDCARD="12345678Z",
-                                                nAMeAndSURNAME="JOSE LOPEZ",
+        valor = my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                                idcard="12345678Z",
+                                                nameandsurname="JOSE LOPEZ",
                                                 phonenumber="911234567",
                                                 room_type="SINGLE",
                                                 arrival="14/10/2024",
@@ -60,9 +60,9 @@ class test_room_reservation(TestCase):
         """
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554442",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554442",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -71,13 +71,14 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_cd_tc3(self):
         """
-        Tarjeta de credito invalida, no es un entero
+        CASI todas las clases válidas
         """
+        # Tarjeta de credito invalida, no es un entero
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="555555555555444a",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="555555555555444a",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -86,13 +87,14 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_cd_tc4(self):
         """
-        Tarjeta de credito invalida, numero mas largo
+        CASI todas las clases válidas
         """
+        # Tarjeta de credito invalida, numero mas largo
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="95555555555554440",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="95555555555554440",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -101,13 +103,14 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_cd_tc5(self):
         """
-        Tarjeta de credito invalida, numero mas corto
+        CASI todas las clases válidas
         """
+        # Tarjeta de credito invalida, numero mas corto
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="555555555554440",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="555555555554440",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -116,13 +119,14 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_id_tc6(self):
         """
-        Dni invalido, no cumple el formato
+        CASI todas las clases válidas
         """
+        # Dni invalido, no cumple el formato
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="123456789",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="123456789",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -131,13 +135,14 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_id_tc7(self):
         """
-        Dni invalido, longitud 10
+        CASI todas las clases válidas
         """
+        # Dni invalido, longitud 10
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="123456789Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="123456789Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -146,13 +151,14 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_id_tc8(self):
         """
-        Dni invalido, longitud 8
+        CASI todas las clases válidas
         """
+        # Dni invalido, longitud 8
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="1234567Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="1234567Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -161,13 +167,14 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_nombre_tc9(self):
         """
-        Nombre invalido, no es un string
+        CASI todas las clases válidas
         """
+        # Nombre invalido, no es un string
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="1234",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="1234",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -176,12 +183,13 @@ class test_room_reservation(TestCase):
 
     def test_valid_tc10(self):
         """
-        Nombre válido de 3 cadenas
+        CASI todas las clases válidas
         """
+        # Nombre válido de 3 cadenas
         my_reservation = HotelManager()
-        valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                                IDCARD="12345678Z",
-                                                nAMeAndSURNAME="ANTONIO LOPEZ LOPEZ",
+        valor = my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                                idcard="12345678Z",
+                                                nameandsurname="ANTONIO LOPEZ LOPEZ",
                                                 phonenumber="911234567",
                                                 room_type="SINGLE",
                                                 arrival="14/10/2024",
@@ -198,13 +206,14 @@ class test_room_reservation(TestCase):
 
     def test_1_cadena_nombre_tc11(self):
         """
-        Nombre invalido, tiene una o menos cadenas de caracteres
+        CASI todas las clases válidas
         """
+        # Nombre invalido, tiene una o menos cadenas de caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSELUISLOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSELUISLOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -213,13 +222,14 @@ class test_room_reservation(TestCase):
 
     def test_4_cadenas_nombre_tc12(self):
         """
-        Nombre invalido, tiene cuatro cadenas de caracteres o más
+        CASI todas las clases válidas
         """
+        # Nombre invalido, tiene cuatro cadenas de caracteres o más
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ LOPEZ LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ LOPEZ LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -228,13 +238,14 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_nombre_tc13(self):
         """
-        Nombre invalido, menos de 10 caracteres
+        CASI todas las clases válidas
         """
+        # Nombre invalido, menos de 10 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPE",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPE",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -243,13 +254,14 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_nombre_tc14(self):
         """
-        Nombre invalido, mas de 50 caracteres
+        CASI todas las clases válidas
         """
+        # Nombre invalido, mas de 50 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JJJJJJJJJJJJJJJJJJJJJJJJ JJJJJJJJJJJJJJJJJJJJJJJJJJ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JJJJJJJJJJJJJJJJJJJJJJJJ JJJJJJJJJJJJJJJJJJJJJJJJJJ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -258,13 +270,14 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_phone_tc15(self):
         """
-        Telefono invalido, no es un entero
+        CASI todas las clases válidas
         """
+        # Telefono invalido, no es un entero
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="91123456e",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -273,13 +286,14 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_phone_tc16(self):
         """
-        Telefono invalido, longitud 10
+        CASI todas las clases válidas
         """
+        # Telefono invalido, longitud 10
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="9112345678",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -288,13 +302,14 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_phone_tc17(self):
         """
-        Telefono invalido, longitud 8
+        CASI todas las clases válidas
         """
+        # Telefono invalido, longitud 8
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="91123456",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -303,13 +318,14 @@ class test_room_reservation(TestCase):
 
     def test_habitacion_incorrecta_tc18(self):
         """
-        Habitación incorrecta
+        CASI todas las clases válidas
         """
+        # Habitación incorrecta
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="5U1T3",
                                             arrival="14/10/2024",
@@ -318,12 +334,13 @@ class test_room_reservation(TestCase):
 
     def test_valid_tc19(self):
         """
-        Habitación correcta DOUBLE
+        CASI todas las clases válidas
         """
+        # Habitación correcta DOUBLE
         my_reservation = HotelManager()
-        valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                                IDCARD="12345678Z",
-                                                nAMeAndSURNAME="ANTONIO LOPEZ",
+        valor = my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                                idcard="12345678Z",
+                                                nameandsurname="ANTONIO LOPEZ",
                                                 phonenumber="911234567",
                                                 room_type="DOUBLE",
                                                 arrival="14/10/2024",
@@ -340,12 +357,13 @@ class test_room_reservation(TestCase):
 
     def test_valid_tc20(self):
         """
-        Habitación correcta SUITE
+        CASI todas las clases válidas
         """
+        # Habitación correcta SUITE
         my_reservation = HotelManager()
-        valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                                IDCARD="12345678Z",
-                                                nAMeAndSURNAME="ANTONIO LOPEZ",
+        valor = my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                                idcard="12345678Z",
+                                                nameandsurname="ANTONIO LOPEZ",
                                                 phonenumber="911234567",
                                                 room_type="SUITE",
                                                 arrival="14/10/2024",
@@ -362,13 +380,14 @@ class test_room_reservation(TestCase):
 
     def test_formato_llegada_tc21(self):
         """
-        Llegada invalida, fecha no existe
+        CASI todas las clases válidas
         """
+        # Llegada invalida, fecha no existe
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="24/55/2678",
@@ -377,13 +396,14 @@ class test_room_reservation(TestCase):
 
     def test_formato_llegada_tc22(self):
         """
-        Llegada invalida, formato incorrecto
+        CASI todas las clases válidas
         """
+        # Llegada invalida, formato incorrecto
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="1401602024",
@@ -392,13 +412,14 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_llegada_tc23(self):
         """
-        Llegada invalida, 11 caracteres
+        CASI todas las clases válidas
         """
+        # Llegada invalida, 11 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/20245",
@@ -407,13 +428,14 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_llegada_tc24(self):
         """
-        Llegada invalida, 9 caracteres
+        CASI todas las clases válidas
         """
+        # Llegada invalida, 9 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/6/2024",
@@ -422,13 +444,14 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_num_dias_tc25(self):
         """
-        Numero de dias invalido formato
+        CASI todas las clases válidas
         """
+        # Numero de dias invalido formato
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -437,13 +460,14 @@ class test_room_reservation(TestCase):
 
     def test_mas_num_dias_tc26(self):
         """
-        Numero de dias invalido, 11 dias
+        CASI todas las clases válidas
         """
+        # Numero de dias invalido, 11 dias
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
@@ -452,13 +476,14 @@ class test_room_reservation(TestCase):
 
     def test_menos_num_dias_tc27(self):
         """
-        Número de dias inválido, 0 dias
+        CASI todas las clases válidas
         """
+        # Número de dias inválido, 11 dias
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
-            my_reservation.room_reservation(creditcardNumb="5555555555554444",
-                                            IDCARD="12345678Z",
-                                            nAMeAndSURNAME="JOSE LOPEZ",
+            my_reservation.room_reservation(creditcardnumb="5555555555554444",
+                                            idcard="12345678Z",
+                                            nameandsurname="JOSE LOPEZ",
                                             phonenumber="911234567",
                                             room_type="SINGLE",
                                             arrival="14/10/2024",
