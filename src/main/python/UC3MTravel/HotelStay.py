@@ -2,16 +2,17 @@
 from datetime import datetime, timedelta
 import hashlib
 
-class HotelStay():
-    def __init__(self, idcard, localizer, numdays, roomtype  ):
+
+class HotelStay:
+    def __init__(self, idcard, localizer, numdays, roomtype):
         self.__alg = "SHA-256"
         self.__type = roomtype
         self.__idcard = idcard
         self.__localizer = localizer
         justnow = datetime.utcnow()
         self.__arrival = justnow
-        #timestamp is represented in seconds.miliseconds
-        #to add the number of days we must express numdays in seconds
+        # timestamp is represented in seconds.miliseconds
+        # to add the number of days we must express numdays in seconds
         self.__departure = self.__arrival + timedelta(days=int(numdays))
 
     def __signature_string(self):

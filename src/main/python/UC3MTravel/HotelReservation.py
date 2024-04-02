@@ -1,13 +1,11 @@
-
 import hashlib
-import json
-from datetime import datetime
+
 
 class HotelReservation:
-    def __init__(self, idcard, creditcardnumb, nameeandsurname, phonenumber, arrival, room_type, numdays):
+    def __init__(self, idcard, creditcardnumb, nameandsurname, phonenumber, arrival, room_type, numdays):
         self.__crEDITcardnumber = creditcardnumb
         self.__idcard = idcard
-        self.__NAME_SURNAME = nameeandsurname
+        self.__NAME_SURNAME = nameandsurname
         self.__phonenumber = phonenumber
         self.__roomtype = room_type
         self.__num_days = numdays
