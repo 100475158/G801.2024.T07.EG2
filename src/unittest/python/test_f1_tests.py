@@ -71,9 +71,8 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_cd_tc3(self):
         """
-        CASI todas las clases válidas
+        Tarjeta de credito invalida, no es un entero
         """
-        # Tarjeta de credito invalida, no es un entero
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="555555555555444a",
@@ -87,9 +86,8 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_cd_tc4(self):
         """
-        CASI todas las clases válidas
+        Tarjeta de credito invalida, numero mas largo
         """
-        # Tarjeta de credito invalida, numero mas largo
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="95555555555554440",
@@ -103,9 +101,8 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_cd_tc5(self):
         """
-        CASI todas las clases válidas
+        Tarjeta de credito invalida, numero mas corto
         """
-        # Tarjeta de credito invalida, numero mas corto
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="555555555554440",
@@ -119,9 +116,8 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_id_tc6(self):
         """
-        CASI todas las clases válidas
+        Dni invalido, no cumple el formato
         """
-        # Dni invalido, no cumple el formato
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -135,9 +131,8 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_id_tc7(self):
         """
-        CASI todas las clases válidas
+        Dni invalido, longitud 10
         """
-        # Dni invalido, longitud 10
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -151,9 +146,8 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_id_tc8(self):
         """
-        CASI todas las clases válidas
+        Dni invalido, longitud 8
         """
-        # Dni invalido, longitud 8
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -167,9 +161,8 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_nombre_tc9(self):
         """
-        CASI todas las clases válidas
+        Nombre invalido, no es un string
         """
-        # Nombre invalido, no es un string
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -183,9 +176,8 @@ class test_room_reservation(TestCase):
 
     def test_valid_tc10(self):
         """
-        CASI todas las clases válidas
+        Nombre válido de 3 cadenas
         """
-        # Nombre válido de 3 cadenas
         my_reservation = HotelManager()
         valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
                                                 IDCARD="12345678Z",
@@ -206,9 +198,8 @@ class test_room_reservation(TestCase):
 
     def test_1_cadena_nombre_tc11(self):
         """
-        CASI todas las clases válidas
+        Nombre invalido, tiene una o menos cadenas de caracteres
         """
-        # Nombre invalido, tiene una o menos cadenas de caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -222,9 +213,8 @@ class test_room_reservation(TestCase):
 
     def test_4_cadenas_nombre_tc12(self):
         """
-        CASI todas las clases válidas
+        Nombre invalido, tiene cuatro cadenas de caracteres o más
         """
-        # Nombre invalido, tiene cuatro cadenas de caracteres o más
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -238,9 +228,8 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_nombre_tc13(self):
         """
-        CASI todas las clases válidas
+        Nombre invalido, menos de 10 caracteres
         """
-        # Nombre invalido, menos de 10 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -254,9 +243,8 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_nombre_tc14(self):
         """
-        CASI todas las clases válidas
+        Nombre invalido, mas de 50 caracteres
         """
-        # Nombre invalido, mas de 50 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -270,9 +258,8 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_phone_tc15(self):
         """
-        CASI todas las clases válidas
+        Telefono invalido, no es un entero
         """
-        # Telefono invalido, no es un entero
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -286,9 +273,8 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_phone_tc16(self):
         """
-        CASI todas las clases válidas
+        Telefono invalido, longitud 10
         """
-        # Telefono invalido, longitud 10
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -302,9 +288,8 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_phone_tc17(self):
         """
-        CASI todas las clases válidas
+        Telefono invalido, longitud 8
         """
-        # Telefono invalido, longitud 8
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -318,9 +303,8 @@ class test_room_reservation(TestCase):
 
     def test_habitacion_incorrecta_tc18(self):
         """
-        CASI todas las clases válidas
+        Habitación incorrecta
         """
-        # Habitación incorrecta
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -334,9 +318,8 @@ class test_room_reservation(TestCase):
 
     def test_valid_tc19(self):
         """
-        CASI todas las clases válidas
+        Habitación correcta DOUBLE
         """
-        # Habitación correcta DOUBLE
         my_reservation = HotelManager()
         valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
                                                 IDCARD="12345678Z",
@@ -357,9 +340,8 @@ class test_room_reservation(TestCase):
 
     def test_valid_tc20(self):
         """
-        CASI todas las clases válidas
+        Habitación correcta SUITE
         """
-        # Habitación correcta SUITE
         my_reservation = HotelManager()
         valor = my_reservation.room_reservation(creditcardNumb="5555555555554444",
                                                 IDCARD="12345678Z",
@@ -380,9 +362,8 @@ class test_room_reservation(TestCase):
 
     def test_formato_llegada_tc21(self):
         """
-        CASI todas las clases válidas
+        Llegada invalida, fecha no existe
         """
-        # Llegada invalida, fecha no existe
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -396,9 +377,8 @@ class test_room_reservation(TestCase):
 
     def test_formato_llegada_tc22(self):
         """
-        CASI todas las clases válidas
+        Llegada invalida, formato incorrecto
         """
-        # Llegada invalida, formato incorrecto
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -412,9 +392,8 @@ class test_room_reservation(TestCase):
 
     def test_mas_long_llegada_tc23(self):
         """
-        CASI todas las clases válidas
+        Llegada invalida, 11 caracteres
         """
-        # Llegada invalida, 11 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -428,9 +407,8 @@ class test_room_reservation(TestCase):
 
     def test_menos_long_llegada_tc24(self):
         """
-        CASI todas las clases válidas
+        Llegada invalida, 9 caracteres
         """
-        # Llegada invalida, 9 caracteres
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -444,9 +422,8 @@ class test_room_reservation(TestCase):
 
     def test_tipo_dato_num_dias_tc25(self):
         """
-        CASI todas las clases válidas
+        Numero de dias invalido formato
         """
-        # Numero de dias invalido formato
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -460,9 +437,8 @@ class test_room_reservation(TestCase):
 
     def test_mas_num_dias_tc26(self):
         """
-        CASI todas las clases válidas
+        Numero de dias invalido, 11 dias
         """
-        # Numero de dias invalido, 11 dias
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
@@ -476,9 +452,8 @@ class test_room_reservation(TestCase):
 
     def test_menos_num_dias_tc27(self):
         """
-        CASI todas las clases válidas
+        Número de dias inválido, 0 dias
         """
-        # Número de dias inválido, 11 dias
         my_reservation = HotelManager()
         with self.assertRaises(HotelManagementException) as cm:
             my_reservation.room_reservation(creditcardNumb="5555555555554444",
