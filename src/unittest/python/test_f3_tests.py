@@ -20,7 +20,7 @@ sys.path.append(src_dir)
 
 class TestGuestArrival(TestCase):
     """
-    Creación de la clase.
+    Clase principal para pruebas relacionadas con la salida de huéspedes..
     """
     file_store = None
 
