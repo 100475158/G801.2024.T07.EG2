@@ -1,18 +1,18 @@
 import json
-from pathlib import Path
 import os
-from .HotelManagementException import HotelManagementException
-from .HotelReservation import HotelReservation
-from .HotelStay import HotelStay
 import re
 import calendar
 from datetime import datetime, timezone
+from pathlib import Path
+from .HotelManagementException import HotelManagementException
+from .HotelReservation import HotelReservation
+from .HotelStay import HotelStay
+
 
 
 class HotelManager:
     def __init__(self):
         pass
-
 
     def room_reservation(self,
                          idcard,
@@ -24,7 +24,7 @@ class HotelManager:
                          numdays):
 
         def validatecreditcard(numero_tarjeta):
-            #Comprobamos que sea un entero y que sea de 16 digitos
+            # Comprobamos que sea un entero y que sea de 16 digitos
             if len(str(numero_tarjeta)) < 16:
                 raise HotelManagementException("El numero de la tarjeta de credito es demasiado corto")
 
@@ -34,7 +34,6 @@ class HotelManager:
             # Cambio el numero de la tarjeta(que es un string) a una lista de enteros
             for numero in str(numero_tarjeta):
                 lista_tarjeta.append(int(numero))
-
 
                 if not numero_tarjeta.isdigit():
                     raise HotelManagementException("La tarjeta de credito no es un entero")
@@ -61,8 +60,7 @@ class HotelManager:
                 suma_digito += digito
             if suma_digito % 10 == 0:
                 return True
-            else:
-                raise HotelManagementException("La tarjeta de credito no cumple el algoritmo de Luhn")
+            raise HotelManagementException("La tarjeta de credito no cumple el algoritmo de Luhn")
 
         def validate_id_card(id_card):
             tabla_letras = 'TRWAGMYFPDXBNJZSQVHLCKE'
@@ -125,7 +123,7 @@ class HotelManager:
             return True
 
         def validate_arrival(llegada):
-            #Comprobamos que sea un string de 10 caracteres
+            # Comprobamos que sea un string de 10 caracteres
             if len(llegada) < 10:
                 raise HotelManagementException("La llegada es menor de 10 caracteres")
             if len(llegada) > 10:
@@ -157,6 +155,7 @@ class HotelManager:
                 elif not bisiesto and dia > 28:
                     raise HotelManagementException("La llegada no es valida, esa fecha no existe")
             return True
+
         def validate_num_days(dias):
             # Comprobamos que sea un entero y que este entre 1 y 10
             if not dias.isdigit():
@@ -167,7 +166,8 @@ class HotelManager:
                 raise HotelManagementException("El numero de dias es menor de 1")
             return True
 
-            #Llamamos a las funciones despues de definirlas
+            # Llamamos a las funciones despues de definirlas
+
         try:
             validatecreditcard(creditcardnumb)
             validate_id_card(idcard)
@@ -343,28 +343,27 @@ class HotelManager:
         except HotelManagementException as e:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
 
-                # Nodo F
+            # Nodo F
+
 
 def ReaddatafromJSOn(self, fi):
+    try:
+        with open(fi) as f:
+            DATA = json.load(f)
+    except FileNotFoundError as e:
+        raise HotelManagementException("Wrong file or file path") from e
+    except json.JSONDecodeError as e:
+        raise HotelManagementException("JSON Decode Error - Wrong JSON Format") from e
 
-        try:
-            with open(fi) as f:
-                DATA = json.load(f)
-        except FileNotFoundError as e:
-            raise HotelManagementException("Wrong file or file path") from e
-        except json.JSONDecodeError as e:
-            raise HotelManagementException("JSON Decode Error - Wrong JSON Format") from e
+    try:
+        c = DATA["CreditCard"]
+        p = DATA["phoneNumber"]
+        req = HotelReservation(idcard="12345678Z", creditcardnumb=c, nameandsurname="John Doe", phonenumber=p,
+                               room_type="single", numdays=3)
+    except KeyError as e:
+        raise HotelManagementException("JSON Decode Error - Invalid JSON Key") from e
+    if not self.validatecreditcard(c):
+        raise HotelManagementException("Invalid credit card number")
 
-
-        try:
-            c = DATA["CreditCard"]
-            p = DATA["phoneNumber"]
-            req = HotelReservation(idcard="12345678Z", creditcardnumb=c, nameandsurname="John Doe", phonenumber=p, room_type="single", numdays=3)
-        except KeyError as e:
-            raise HotelManagementException("JSON Decode Error - Invalid JSON Key") from e
-        if not self.validatecreditcard(c):
-            raise HotelManagementException("Invalid credit card number")
-
-        # Close the file
-        return req
-
+    # Close the file
+    return req

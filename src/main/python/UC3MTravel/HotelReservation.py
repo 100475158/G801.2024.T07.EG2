@@ -41,4 +41,3 @@ class HotelReservation:
     def LOCALIZER(self):
         """Returns the md5 signature"""
         return hashlib.md5(self.__str__().encode()).hexdigest()
-
