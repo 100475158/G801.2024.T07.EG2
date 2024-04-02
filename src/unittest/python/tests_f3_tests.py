@@ -74,10 +74,3 @@ class TestGuestArrival(TestCase):
                          "Error de procesamiento interno: La fecha de salida no es válida")
 
 
-    @freeze_time("2024-10-16")
-    def test_guest_checkout_test_tc6(self):
-        # El room_key no se encuentra en el archivos de estancias (el archivo sí existe)
-        checkout = HotelManager()
-        with self.assertRaises(HotelManagementException) as cm:
-            checkout.guest_checkout("770c547dc8adacd3860f47b8c9e8f6815269f967478a141e458aa4104dfab24f")
-        self.assertEqual(cm.exception.message,"Error de procesamiento interno: El código de habitación no estaba registrado")

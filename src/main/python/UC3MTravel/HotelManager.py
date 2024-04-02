@@ -313,8 +313,8 @@ class HotelManager:
             # Verifico si esta registrado en el archivo de estancias
             tcc0 = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/hotel_stays.json"
             with open(tcc0, "r") as estancias_file:  # Nodo 3
-                reserva = json.load(estancias_file)  # Nodo 4                       #Nodo 5
-                if reserva.get("room_key") == room_key:  # Nodo 6
+                reserva = json.load(estancias_file)  # Nodo 4
+                if reserva.get("room_key") == room_key:  # Nodo 5
                     # Obtener la fecha y hora actual en formato UTC
                     fecha_actual = datetime.utcnow().replace(tzinfo=timezone.utc)
 
@@ -323,16 +323,16 @@ class HotelManager:
 
                     # Verificar si departure(salida programada calculada en f2) coincide con fecha_actual(fecha de salida)
                     fecha_salida = reserva.get("departure")
-                    if fecha_salida == fecha_actual_formateada:  # Nodo 7
+                    if fecha_salida == fecha_actual_formateada:  # Nodo 6
                         # Registra la entrega en un archivo con la marca de tiempo (hora UTC) en que el cliente ha dejado la habitación
                         # y el código de la habitación
                         # se registra la salida en un fichero
                         directorio = str(Path.home()) + "/PycharmProjects/G801.2024.T07.EG2/src/json_files/"
                         checkouts_file_path = directorio + "check-outs.json"
-                        with open(checkouts_file_path, "a") as checkouts_file:
+                        with open(checkouts_file_path, "a") as checkouts_file:  # Nodo 7
                             data = {"room_key": room_key, "departure": fecha_actual.strftime("%Y-%m-%d %H:%M:%S")}
                             json.dump(data, checkouts_file)
-                        return True
+                        return True  # Nodo 8
                     else:
                         raise HotelManagementException("La fecha de salida no es válida")  # Nodo 14
                 else:
@@ -342,11 +342,8 @@ class HotelManager:
             raise HotelManagementException("No se encuentra el archivo de datos")  # Nodo 12
         except HotelManagementException as e:
             raise HotelManagementException(f"Error de procesamiento interno: {str(e)}")
-        except PermissionError:
-            raise HotelManagementException("No se puede abrir el archivo")  # Nodo 15
 
-
-# Nodo F
+                # Nodo F
 
 def ReaddatafromJSOn(self, fi):
 
