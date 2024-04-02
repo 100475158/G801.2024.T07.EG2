@@ -1,3 +1,6 @@
+"""
+Este módulo contiene las funciones del hotel
+"""
 import json
 import os
 import re
@@ -7,7 +10,6 @@ from pathlib import Path
 from .HotelManagementException import HotelManagementException
 from .HotelReservation import HotelReservation
 from .HotelStay import HotelStay
-
 
 
 class HotelManager:
